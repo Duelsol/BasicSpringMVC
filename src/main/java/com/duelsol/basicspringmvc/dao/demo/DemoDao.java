@@ -14,8 +14,8 @@ import java.util.Map;
  */
 public interface DemoDao {
 
-    public List<Map> findAllAccounts() throws SQLException;
+    List<Map> findAllAccounts() throws SQLException;
 
-    public DemoEntity getDemoByID(int id) throws SQLException;
+    DemoEntity getDemoByID(int id) throws SQLException;
 
 }

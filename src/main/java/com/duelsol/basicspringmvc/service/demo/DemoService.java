@@ -14,10 +14,10 @@ import java.util.Map;
  */
 public interface DemoService {
 
-    public List<Map> findAllAccounts() throws SQLException;
+    List<Map> findAllAccounts() throws SQLException;
 
-    public DemoEntity getDemoById(int id) throws SQLException;
+    DemoEntity getDemoById(int id) throws SQLException;
 
-    public void saveDemos();
+    void saveDemos();
 
 }

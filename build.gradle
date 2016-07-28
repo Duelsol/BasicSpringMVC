@@ -4,12 +4,56 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'war'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.7
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    springframework_version = '3.2.0.RELEASE'
+}
+
 dependencies {
+    compile (
+            "org.apache.logging.log4j:log4j-core:2.5",
+            "org.apache.logging.log4j:log4j-api:2.5",
+            "org.apache.ant:ant-antlr:1.9.7",
+            "com.google.guava:guava:18.0",
+            "javax.servlet:jstl:1.2",
+            "aopalliance:aopalliance:1.0",
+            "org.aspectj:aspectjweaver:1.8.2",
+            "javax.servlet.jsp:jsp-api:2.1",
+            "javax.servlet:servlet-api:2.5",
+            "taglibs:standard:1.1.2",
+            "org.mybatis:mybatis:3.2.8",
+            "org.mybatis:mybatis-spring:1.2.2",
+            "mysql:mysql-connector-java:5.1.37",
+            "org.directwebremoting:dwr:3.0.0-RELEASE",
+            "org.codehaus.jackson:jackson-core-asl:1.9.9",
+            "org.codehaus.jackson:jackson-mapper-asl:1.9.9",
+            "net.sf.json-lib:json-lib:2.4:jdk15",
+
+            "commons-beanutils:commons-beanutils:1.9.2",
+            "org.apache.commons:commons-collections4:4.1",
+            "org.apache.commons:commons-dbcp2:2.1.1",
+            "org.apache.commons:commons-jexl:2.1.1",
+            "org.apache.commons:commons-lang3:3.3.2",
+            "commons-logging:commons-logging:1.2",
+            "org.apache.commons:commons-pool2:2.4.2",
+
+            "org.springframework:spring-aop:$springframework_version",
+            "org.springframework:spring-beans:$springframework_version",
+            "org.springframework:spring-context:$springframework_version",
+            "org.springframework:spring-core:$springframework_version",
+            "org.springframework:spring-jdbc:$springframework_version",
+            "org.springframework:spring-orm:$springframework_version",
+            "org.springframework:spring-expression:$springframework_version",
+            "org.springframework:spring-test:$springframework_version",
+            "org.springframework:spring-tx:$springframework_version",
+            "org.springframework:spring-web:$springframework_version",
+            "org.springframework:spring-webmvc:$springframework_version"
+    )
+    compile fileTree(dir: 'lib', include: '*.jar')
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }

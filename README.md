@@ -1,5 +1,5 @@
 # BasicSpringMVC
 
-A demo of SpringMVC combined with other techniques, including:
+An application skeleton for SpringMVC project. 
 
-Spring, MyBatis, Log4j2, jQuery, Bootstrap, DWR.
+Also combined with other techniques, including: Spring, MyBatis, Log4j2, jQuery, Bootstrap, DWR.

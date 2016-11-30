@@ -14,10 +14,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache">
-    <meta http-equiv="X-UA-Compatible" content="IE=IE8">
 
     <!-- jQuery -->
     <link type="text/css" href="${pageContext.request.contextPath}/framework/jquery/css/jquery-ui.min.css" rel="stylesheet"/>
@@ -33,6 +34,9 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/framework/jquery/js/jquery-ui-1.11.2.min.js"></script>
     <!-- Bootstrap -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/framework/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/ie10-viewport-bug-workaround.js"></script>
 
     <!-- DWR -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/dwr/engine.js"></script>

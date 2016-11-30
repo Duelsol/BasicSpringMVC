@@ -8,62 +8,12 @@
 <%@ include file="common.jsp" %>
 <html>
 <head>
-    <title>jquery顶部固定导航下拉菜单</title>
-    <link type="text/css" href="${pageContext.request.contextPath}/css/index/topanv.css" rel="stylesheet"/>
+    <title>Narrow Jumbotron Template for Bootstrap</title>
+
+    <!-- Custom styles for this template -->
+    <link href="${pageContext.request.contextPath}/css/index/jumbotron-narrow.css" rel="stylesheet">
+
     <script type="text/javascript">
-        $(function () {
-            var $anvlfteb = $('#anvlfteb'),
-                    $posbox = $anvlfteb.find('div.posbox'),
-                    $seledbox = $("#seledbox"),
-                    anvjson = {
-                        bbs: '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico7.gif">抚州快讯</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico17.gif">国内新闻</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico3.gif">军事快讯</a>',
-                        news: '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico7.gif">抚州快讯</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico4.png">抚州教育</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico34.gif">江西快讯</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico17.gif">国内新闻</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico3.gif">军事快讯</a>',
-                        post: '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico7.gif">抚州快讯</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico4.png">抚州教育</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico17.gif">国内新闻</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico3.gif">军事快讯</a>',
-                        youhui: '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico7.gif">抚州快讯</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico4.png">抚州教育</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico34.gif">江西快讯</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico17.gif">国内新闻</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico3.gif">军事快讯</a>',
-                        other: '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico7.gif">抚州快讯</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico4.png">抚州教育</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico17.gif">国内新闻</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico3.gif">军事快讯</a>',
-                        store: '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico7.gif">抚州快讯</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico4.png">抚州教育</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico34.gif">江西快讯</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico17.gif">国内新闻</a>' +
-                                '<a href="#"><img src="${pageContext.request.contextPath}/css/index/images/ico3.gif">军事快讯</a>'
-                    };
-
-
-            $posbox.mouseover(function () {
-                var i = $(this).index();
-                $(this).addClass("anvh").siblings().removeClass("anvh");
-                var selec = $(this).attr("selec");
-                if ($seledbox.is(":hidden")) {
-                    $seledbox.show().css("left", 64 * i + 1).html("<div>" + anvjson[selec] + "</div>")
-                } else {
-                    $seledbox.stop().animate({left: 64 * i + 1}, 200, function () {
-                        $("#seledbox").html("<div>" + anvjson[selec] + "</div>")
-                    })
-                }
-            });
-
-            $anvlfteb.mouseleave(function () {
-                $seledbox.hide();
-                $posbox.removeClass("anvh");
-            })
-        });
-
         function testDWR() {
             common.call({
                 async: false,
@@ -77,28 +27,52 @@
         }
     </script>
 </head>
-<body style="height:2000px">
-    <div id="topnavbar" style="display: block;">
-        <div id="topnanv" style="width: 980px;">
-            <div class="defu">
-                <a href="#" target="_self">首页</a>
+<body>
+    <div class="container">
+        <div class="header">
+            <ul class="nav nav-pills pull-right" role="tablist">
+                <li role="presentation" class="active"><a href="#">Home</a></li>
+                <li role="presentation"><a href="#">About</a></li>
+                <li role="presentation"><a href="#">Contact</a></li>
+            </ul>
+            <h3 class="text-muted">Project name</h3>
+        </div>
+
+        <div class="jumbotron">
+            <h1>Jumbotron heading</h1>
+            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+            <p>
+                <a class="btn btn-lg btn-success" href="#" role="button" onclick="testDWR()">Sign up today</a>
+            </p>
+        </div>
+
+        <div class="row marketing">
+            <div class="col-lg-6">
+                <h4>Subheading</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+                <h4>Subheading</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+                <h4>Subheading</h4>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
             </div>
-            <div id="anvlfteb">
-                <div selec="bbs" class="posbox"> <a href="#">新闻</a> <i></i></div>
-                <div selec="news" class="posbox"><a href="#">信息</a> <i></i></div>
-                <div selec="post" class="posbox"><a href="#">商家</a> <i></i></div>
-                <div selec="youhui" class="posbox"><a href="#">社区</a> <i></i></div>
-                <div selec="other" class="posbox"><a href="#">团购</a> <i></i></div>
-                <div selec="store" class="posbox"><a href="#">房产</a> <i></i></div>
-                <div id="seledbox" class="posiabox" style="display: none; left: 1px;"></div>
-            </div>
-            <div id="loginbtm">
-                <a style="color:#FFF" target="_blank" href="javascript:testDWR()">免费发布信息</a>
+
+            <div class="col-lg-6">
+                <h4>Subheading</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+                <h4>Subheading</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+                <h4>Subheading</h4>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
             </div>
         </div>
-    </div>
-    <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
-        <p>适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗.</p>
+
+        <div class="footer">
+            <p>&copy; Company 2014</p>
+        </div>
     </div>
 </body>
 </html>

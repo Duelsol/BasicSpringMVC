@@ -14,14 +14,11 @@
     <link href="${pageContext.request.contextPath}/css/index/jumbotron-narrow.css" rel="stylesheet">
 
     <script type="text/javascript">
-        function testDWR() {
-            common.call({
-                async: false,
-                className: "com.duelsol.basicspringmvc.framework.Test",
-                method: "test",
-                param: {id: 123},
-                callBack: function (result) {
-                    alert(result);
+        function demo() {
+            $.ajax({
+                url: "/demo",
+                success: function (data) {
+                    common.debug(data);
                 }
             });
         }
@@ -42,7 +39,7 @@
             <h1>Jumbotron heading</h1>
             <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
             <p>
-                <a class="btn btn-lg btn-success" href="#" role="button" onclick="testDWR()">Sign up today</a>
+                <a class="btn btn-lg btn-success" href="javascript:void(0)" role="button" onclick="demo()">Sign up today</a>
             </p>
         </div>
 

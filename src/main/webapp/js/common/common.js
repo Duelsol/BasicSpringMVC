@@ -1,6 +1,22 @@
-var DebugUtils = {};
+var common = {version: "20150102"};
 
-DebugUtils.toString = function (data, level, depth) {
+common.debug = function (data, level, depth) {
+    var text = common.toString(data, level, depth).replace("\n", "<br>");
+    if ($("#__debugDiv").length == 0) {
+        $("body").append("<div style='display:none' id='__debugDiv'></div>");
+    }
+    var alertDiv = $("#__debugDiv");
+    $(alertDiv).html(text);
+    $(alertDiv).dialog({
+        width: 500,
+        title: "Debug",
+        modal: true,
+        resizable: false,
+        zIndex: 99999
+    });
+};
+
+common.toString = function (data, level, depth) {
     function _isArray(data) {
         return (data && data.join) ? true : false;
     }

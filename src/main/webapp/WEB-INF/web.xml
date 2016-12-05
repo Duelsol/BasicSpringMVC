@@ -35,10 +35,6 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>spring</servlet-name>
-        <url-pattern>/dwr/*</url-pattern>
-    </servlet-mapping>
 
     <listener>
         <listener-class>com.duelsol.basicspringmvc.framework.listener.Log4j2ConfigListener</listener-class>

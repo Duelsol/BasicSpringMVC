@@ -38,13 +38,8 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/ie10-viewport-bug-workaround.js"></script>
 
-    <!-- DWR -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/dwr/engine.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/dwr/util.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/dwr/interface/DWRMessenger.js"></script>
-
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/common-tools.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/common-core.js"></script>
+    <!-- common -->
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/common.js"></script>
 
     <c:set var="commonInclude" value="1" scope="request"/>
 </c:if>

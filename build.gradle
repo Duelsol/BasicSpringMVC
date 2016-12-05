@@ -29,7 +29,6 @@ dependencies {
             "org.mybatis:mybatis:3.2.8",
             "org.mybatis:mybatis-spring:1.2.2",
             "mysql:mysql-connector-java:5.1.37",
-            "org.directwebremoting:dwr:3.0.0-RELEASE",
             "org.codehaus.jackson:jackson-core-asl:1.9.9",
             "org.codehaus.jackson:jackson-mapper-asl:1.9.9",
             "net.sf.json-lib:json-lib:2.4:jdk15",

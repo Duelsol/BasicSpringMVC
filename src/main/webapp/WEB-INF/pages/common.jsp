@@ -4,8 +4,6 @@
   Date: 15/1/2
   Time: 18:11
 --%>
-<!DOCTYPE HTML>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>

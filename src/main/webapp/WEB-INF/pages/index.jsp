@@ -5,9 +5,10 @@
   Time: 23:25
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="common.jsp" %>
+<!DOCTYPE html>
 <html>
 <head>
+    <%@ include file="common.jsp" %>
     <title>Narrow Jumbotron Template for Bootstrap</title>
 
     <!-- Custom styles for this template -->

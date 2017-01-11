@@ -69,10 +69,8 @@ public abstract class BaseEntity {
     }
 
     public final void delete() {
-        StringBuilder sql = new StringBuilder();
-        sql.append("delete from ").append(this.getTableName()).append(" where id = ").append(this.getId());
         JdbcTemplate template = ApplicationContextHolder.getInstance().getBean(JdbcTemplate.class);
-        template.update(sql.toString());
+        template.update("delete from " + this.getTableName() + " where id = " + this.getId());
 
         this.setId(null);
         this.setCreateTime(null);

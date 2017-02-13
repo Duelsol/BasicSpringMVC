@@ -1,8 +1,8 @@
-package com.duelsol.springmvcseed.service.demo.impl;
+package me.duelsol.springmvcseed.service.demo.impl;
 
-import com.duelsol.springmvcseed.entity.demo.DemoEntity;
-import com.duelsol.springmvcseed.service.BaseService;
-import com.duelsol.springmvcseed.service.demo.DemoService;
+import me.duelsol.springmvcseed.entity.demo.DemoEntity;
+import me.duelsol.springmvcseed.service.BaseService;
+import me.duelsol.springmvcseed.service.demo.DemoService;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;

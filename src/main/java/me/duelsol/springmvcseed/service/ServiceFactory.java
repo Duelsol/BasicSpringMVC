@@ -1,6 +1,6 @@
-package com.duelsol.springmvcseed.service;
+package me.duelsol.springmvcseed.service;
 
-import com.duelsol.springmvcseed.service.demo.DemoService;
+import me.duelsol.springmvcseed.service.demo.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

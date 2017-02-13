@@ -1,7 +1,7 @@
-package com.duelsol.springmvcseed.controller.demo;
+package me.duelsol.springmvcseed.controller.demo;
 
-import com.duelsol.springmvcseed.controller.BaseController;
-import com.duelsol.springmvcseed.entity.demo.DemoEntity;
+import me.duelsol.springmvcseed.controller.BaseController;
+import me.duelsol.springmvcseed.entity.demo.DemoEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;

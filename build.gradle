@@ -1,4 +1,4 @@
-group 'com.duelsol'
+group 'me.duelsol'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'

@@ -37,7 +37,7 @@
 	</servlet-mapping>
 
     <listener>
-        <listener-class>com.duelsol.springmvcseed.framework.listener.Log4j2ConfigListener</listener-class>
+        <listener-class>me.duelsol.springmvcseed.framework.listener.Log4j2ConfigListener</listener-class>
     </listener>
 
 </web-app>

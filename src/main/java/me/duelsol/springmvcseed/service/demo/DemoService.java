@@ -1,6 +1,6 @@
-package com.duelsol.springmvcseed.service.demo;
+package me.duelsol.springmvcseed.service.demo;
 
-import com.duelsol.springmvcseed.entity.demo.DemoEntity;
+import me.duelsol.springmvcseed.entity.demo.DemoEntity;
 
 import java.sql.SQLException;
 import java.util.List;

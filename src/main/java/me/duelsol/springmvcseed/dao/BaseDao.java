@@ -1,4 +1,4 @@
-package com.duelsol.springmvcseed.dao;
+package me.duelsol.springmvcseed.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

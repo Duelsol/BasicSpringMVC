@@ -1,6 +1,6 @@
-package com.duelsol.springmvcseed.service;
+package me.duelsol.springmvcseed.service;
 
-import com.duelsol.springmvcseed.dao.DaoFactory;
+import me.duelsol.springmvcseed.dao.DaoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

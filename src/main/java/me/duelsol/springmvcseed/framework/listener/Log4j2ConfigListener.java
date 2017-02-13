@@ -1,4 +1,4 @@
-package com.duelsol.springmvcseed.framework.listener;
+package me.duelsol.springmvcseed.framework.listener;
 
 import org.apache.logging.log4j.core.config.ConfigurationSource;
 import org.apache.logging.log4j.core.config.Configurator;

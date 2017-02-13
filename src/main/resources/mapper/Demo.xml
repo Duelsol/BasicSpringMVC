@@ -10,7 +10,7 @@
         ]]>
     </select>
 
-    <select id="getDemoByID" parameterType="int" resultType="com.duelsol.springmvcseed.entity.demo.DemoEntity">
+    <select id="getDemoByID" parameterType="int" resultType="me.duelsol.springmvcseed.entity.demo.DemoEntity">
         <![CDATA[
         select * from footprint_demo where id = #{id}
         ]]>

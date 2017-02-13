@@ -1,6 +1,6 @@
-package com.duelsol.springmvcseed.dao;
+package me.duelsol.springmvcseed.dao;
 
-import com.duelsol.springmvcseed.dao.demo.DemoDao;
+import me.duelsol.springmvcseed.dao.demo.DemoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

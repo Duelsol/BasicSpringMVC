@@ -1,8 +1,8 @@
-package com.duelsol.springmvcseed.dao.demo.impl;
+package me.duelsol.springmvcseed.dao.demo.impl;
 
-import com.duelsol.springmvcseed.dao.demo.DemoDao;
-import com.duelsol.springmvcseed.dao.BaseDao;
-import com.duelsol.springmvcseed.entity.demo.DemoEntity;
+import me.duelsol.springmvcseed.dao.demo.DemoDao;
+import me.duelsol.springmvcseed.dao.BaseDao;
+import me.duelsol.springmvcseed.entity.demo.DemoEntity;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;

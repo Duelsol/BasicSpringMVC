@@ -1,4 +1,4 @@
-# BasicSpringMVC
+# springmvc-seed
 
 An application skeleton for a SpringMVC project. 
 

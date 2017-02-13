@@ -1,4 +1,4 @@
-package com.duelsol.basicspringmvc.framework;
+package com.duelsol.springmvcseed.framework;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

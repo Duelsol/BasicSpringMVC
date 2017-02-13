@@ -1,6 +1,6 @@
-package com.duelsol.basicspringmvc.entity;
+package com.duelsol.springmvcseed.entity;
 
-import com.duelsol.basicspringmvc.framework.ApplicationContextHolder;
+import com.duelsol.springmvcseed.framework.ApplicationContextHolder;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

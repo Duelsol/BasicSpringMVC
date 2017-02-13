@@ -1,6 +1,6 @@
-package com.duelsol.basicspringmvc.entity.demo;
+package com.duelsol.springmvcseed.entity.demo;
 
-import com.duelsol.basicspringmvc.entity.BaseEntity;
+import com.duelsol.springmvcseed.entity.BaseEntity;
 
 /**
  * Created with IntelliJ IDEA.

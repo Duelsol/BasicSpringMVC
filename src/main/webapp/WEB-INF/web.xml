@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
 	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
-	<display-name>BasicSpringMVC</display-name>
+	<display-name>springmvc-seed</display-name>
 
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
@@ -37,7 +37,7 @@
 	</servlet-mapping>
 
     <listener>
-        <listener-class>com.duelsol.basicspringmvc.framework.listener.Log4j2ConfigListener</listener-class>
+        <listener-class>com.duelsol.springmvcseed.framework.listener.Log4j2ConfigListener</listener-class>
     </listener>
 
 </web-app>

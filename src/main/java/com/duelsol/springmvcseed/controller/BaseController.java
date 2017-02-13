@@ -1,6 +1,6 @@
-package com.duelsol.basicspringmvc.controller;
+package com.duelsol.springmvcseed.controller;
 
-import com.duelsol.basicspringmvc.service.ServiceFactory;
+import com.duelsol.springmvcseed.service.ServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

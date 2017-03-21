@@ -33,13 +33,14 @@ dependencies {
             "org.codehaus.jackson:jackson-mapper-asl:1.9.9",
             "net.sf.json-lib:json-lib:2.4:jdk15",
 
-            "commons-beanutils:commons-beanutils:1.9.2",
             "org.apache.commons:commons-collections4:4.1",
             "org.apache.commons:commons-dbcp2:2.1.1",
             "org.apache.commons:commons-jexl:2.1.1",
             "org.apache.commons:commons-lang3:3.3.2",
-            "commons-logging:commons-logging:1.2",
             "org.apache.commons:commons-pool2:2.4.2",
+            "org.apache.httpcomponents:httpclient:4.5.3",
+            "commons-beanutils:commons-beanutils:1.9.2",
+            "commons-logging:commons-logging:1.2",
 
             "org.springframework:spring-aop:$springframework_version",
             "org.springframework:spring-beans:$springframework_version",

@@ -16,15 +16,10 @@ ext {
 
 dependencies {
     compile (
-            "org.apache.logging.log4j:log4j-core:2.5",
-            "org.apache.logging.log4j:log4j-api:2.5",
             "org.apache.ant:ant-antlr:1.9.7",
             "com.google.guava:guava:18.0",
-            "javax.servlet:jstl:1.2",
             "aopalliance:aopalliance:1.0",
             "org.aspectj:aspectjweaver:1.8.2",
-            "javax.servlet.jsp:jsp-api:2.1",
-            "javax.servlet:servlet-api:2.5",
             "taglibs:standard:1.1.2",
             "org.mybatis:mybatis:3.2.8",
             "org.mybatis:mybatis-spring:1.2.2",
@@ -32,6 +27,15 @@ dependencies {
             "com.fasterxml.jackson.core:jackson-core:2.8.7",
             "com.fasterxml.jackson.core:jackson-databind:2.8.7",
             "net.sf.json-lib:json-lib:2.4:jdk15",
+
+            "javax.servlet:jstl:1.2",
+            "javax.servlet.jsp:jsp-api:2.1",
+            "javax.servlet:servlet-api:2.5",
+
+            "org.slf4j:slf4j-api:1.7.25",
+            "org.apache.logging.log4j:log4j-core:2.8.2",
+            "org.apache.logging.log4j:log4j-api:2.8.2",
+            "org.apache.logging.log4j:log4j-slf4j-impl:2.8.2",
 
             "org.apache.commons:commons-collections4:4.1",
             "org.apache.commons:commons-dbcp2:2.1.1",

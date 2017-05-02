@@ -2,6 +2,8 @@ package me.duelsol.springmvcseed.controller.demo;
 
 import me.duelsol.springmvcseed.controller.BaseController;
 import me.duelsol.springmvcseed.entity.demo.DemoEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,8 @@ import java.util.Map;
 @RequestMapping("/")
 public class DemoController extends BaseController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(DemoController.class);
+
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 		model.addAttribute("message", "Hello world!");
@@ -26,6 +30,7 @@ public class DemoController extends BaseController {
     @ResponseBody
     public Object findAllAccounts() throws SQLException {
         List<Map> querys = serviceFactory.getDemoService().findAllAccounts();
+        LOGGER.info("total accounts size: {}", querys.size());
         DemoEntity entity = serviceFactory.getDemoService().getDemoById(1);
         if (entity == null) {
             entity = new DemoEntity();

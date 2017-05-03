@@ -3,6 +3,8 @@ package me.duelsol.springmvcseed.service.demo.impl;
 import me.duelsol.springmvcseed.entity.demo.DemoEntity;
 import me.duelsol.springmvcseed.service.BaseService;
 import me.duelsol.springmvcseed.service.demo.DemoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -18,9 +20,13 @@ import java.util.Map;
 @Service
 public class DemoServiceImpl extends BaseService implements DemoService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(DemoServiceImpl.class);
+
     @Override
     public List<Map> findAllAccounts() throws SQLException {
-        return daoFactory.getDemoDao().findAllAccounts();
+        List<Map> result = daoFactory.getDemoDao().findAllAccounts();
+        taskExecutor.execute(() -> LOGGER.info("total accounts size: {}", result.size()));
+        return result;
     }
 
     @Override

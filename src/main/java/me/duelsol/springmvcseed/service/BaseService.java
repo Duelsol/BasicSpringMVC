@@ -2,6 +2,9 @@ package me.duelsol.springmvcseed.service;
 
 import me.duelsol.springmvcseed.dao.DaoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.TaskExecutor;
+
+import javax.annotation.Resource;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,5 +16,8 @@ public class BaseService {
 
     @Autowired
     protected DaoFactory daoFactory;
+
+    @Resource(name = "taskExecutor")
+    protected TaskExecutor taskExecutor;
 
 }

@@ -15,7 +15,8 @@
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task.xsd">
 
     <context:component-scan base-package="me.duelsol.springmvcseed"/>
     <context:annotation-config/>
@@ -41,7 +42,7 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!-- 外部文件 -->
+    <!-- 配置文件 -->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>

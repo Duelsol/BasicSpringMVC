@@ -1,15 +1,17 @@
 package me.duelsol.springmvcseed.service.demo.impl;
 
 import me.duelsol.springmvcseed.entity.demo.DemoEntity;
+import me.duelsol.springmvcseed.framework.messagequeue.MessageQueueConsumer;
+import me.duelsol.springmvcseed.framework.messagequeue.MessageQueueProducer;
 import me.duelsol.springmvcseed.service.BaseService;
 import me.duelsol.springmvcseed.service.demo.DemoService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,13 +22,9 @@ import java.util.Map;
 @Service
 public class DemoServiceImpl extends BaseService implements DemoService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DemoServiceImpl.class);
-
     @Override
     public List<Map> findAllAccounts() throws SQLException {
-        List<Map> result = daoFactory.getDemoDao().findAllAccounts();
-        taskExecutor.execute(() -> LOGGER.info("total accounts size: {}", result.size()));
-        return result;
+        return daoFactory.getDemoDao().findAllAccounts();
     }
 
     @Override
@@ -42,6 +40,19 @@ public class DemoServiceImpl extends BaseService implements DemoService {
             entity.setDetail("index:" + i);
             entity.save();
         }
+    }
+
+    @Override
+    public void testMessageQueue() throws IOException, TimeoutException {
+        MessageQueueConsumer consumer = new MessageQueueConsumer("queue");
+        taskExecutor.execute(consumer);
+
+        MessageQueueProducer producer = new MessageQueueProducer("queue");
+        for (int i = 0; i < 10; i++) {
+            String message = "number " + i;
+            producer.sendMessage(message);
+        }
+        producer.close();
     }
 
 }

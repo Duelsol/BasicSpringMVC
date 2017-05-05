@@ -2,9 +2,11 @@ package me.duelsol.springmvcseed.service.demo;
 
 import me.duelsol.springmvcseed.entity.demo.DemoEntity;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,5 +21,7 @@ public interface DemoService {
     DemoEntity getDemoById(int id) throws SQLException;
 
     void saveDemos();
+
+    void testMessageQueue() throws IOException, TimeoutException;
 
 }

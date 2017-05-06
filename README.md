@@ -2,7 +2,7 @@
 
 An application skeleton for a SpringMVC project. 
 
-Techniques: 
+Frameworks: 
 
 * [Spring](https://spring.io/)
 * [Spring MVC](https://spring.io/)

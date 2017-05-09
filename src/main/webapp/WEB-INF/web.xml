@@ -6,6 +6,16 @@
 	<display-name>springmvc-seed</display-name>
 
     <filter>
+        <filter-name>xssFilter</filter-name>
+        <filter-class>me.duelsol.springmvcseed.framework.filter.XSSFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>xssFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter>
         <filter-name>characterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
         <init-param>

@@ -21,11 +21,6 @@ public class DemoController extends BaseController {
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
-        try {
-            serviceFactory.getDemoService().testMessageQueue();
-        } catch (IOException | TimeoutException e) {
-            LOGGER.error("启动消息队列时发生错误", e);
-        }
         model.addAttribute("message", "Hello world!");
         return "index";
 	}
@@ -39,6 +34,15 @@ public class DemoController extends BaseController {
             LOGGER.error("获取所有账户时发生错误", e);
         }
         return null;
+    }
+
+    @RequestMapping(value = "/mq")
+    public void testMessageQueue() {
+        try {
+            serviceFactory.getDemoService().testMessageQueue();
+        } catch (IOException | TimeoutException e) {
+            LOGGER.error("启动消息队列时发生错误", e);
+        }
     }
 
 }

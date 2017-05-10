@@ -37,6 +37,7 @@ public class DemoController extends BaseController {
     }
 
     @RequestMapping(value = "/mq")
+    @ResponseBody
     public void testMessageQueue() {
         try {
             serviceFactory.getDemoService().testMessageQueue();

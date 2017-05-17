@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * Time: 23:16
  */
 @Repository
-public class DaoFactory {
+public final class DaoFactory {
 
     @Autowired
     private DemoDao demoDao;

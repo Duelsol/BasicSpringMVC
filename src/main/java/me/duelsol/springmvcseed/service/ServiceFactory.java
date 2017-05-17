@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * Time: 11:40
  */
 @Service
-public class ServiceFactory {
+public final class ServiceFactory {
 
     @Autowired
     private DemoService demoService;

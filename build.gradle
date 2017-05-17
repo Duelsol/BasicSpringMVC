@@ -28,6 +28,7 @@ dependencies {
             "com.fasterxml.jackson.core:jackson-databind:2.8.7",
             "net.sf.json-lib:json-lib:2.4:jdk15",
             "com.rabbitmq:amqp-client:4.1.0",
+            "io.jsonwebtoken:jjwt:0.7.0",
 
             "javax.servlet:jstl:1.2",
             "javax.servlet.jsp:jsp-api:2.1",

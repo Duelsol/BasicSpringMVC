@@ -24,7 +24,7 @@ public class DemoDaoImpl extends BaseDao implements DemoDao {
     }
 
     @Override
-    public DemoEntity getDemoByID(int id) throws SQLException {
+    public DemoEntity getDemoByID(final int id) throws SQLException {
         return sqlSessionTemplate.selectOne("demoDao.getDemoByID", id);
     }
 

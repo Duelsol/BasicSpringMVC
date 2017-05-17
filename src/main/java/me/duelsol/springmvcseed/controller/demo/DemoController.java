@@ -1,6 +1,8 @@
 package me.duelsol.springmvcseed.controller.demo;
 
 import me.duelsol.springmvcseed.controller.BaseController;
+import me.duelsol.springmvcseed.framework.token.annotation.Token;
+import me.duelsol.springmvcseed.framework.token.annotation.TokenBehaviour;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,7 @@ public class DemoController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DemoController.class);
 
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/index")
 	public String printWelcome(ModelMap model) {
         model.addAttribute("message", "Hello world!");
         return "index";
@@ -44,6 +46,19 @@ public class DemoController extends BaseController {
         } catch (IOException | TimeoutException e) {
             LOGGER.error("启动消息队列时发生错误", e);
         }
+    }
+
+    @RequestMapping(value = "/create_jwt", method = RequestMethod.POST)
+    @ResponseBody
+    @Token(behaviour = TokenBehaviour.create)
+    public void createJWT() {
+    }
+
+    @RequestMapping(value = "/check_jwt", method = RequestMethod.POST)
+    @ResponseBody
+    @Token
+    public String checkJWT() {
+	    return "JWT check passed.";
     }
 
 }

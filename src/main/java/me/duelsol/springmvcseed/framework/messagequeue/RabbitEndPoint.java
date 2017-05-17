@@ -20,7 +20,7 @@ abstract class RabbitEndPoint {
     Connection connection;
     String queueName;
 
-    RabbitEndPoint(String queueName) throws IOException, TimeoutException {
+    RabbitEndPoint(final String queueName) throws IOException, TimeoutException {
         this.queueName = queueName;
 
         // Create a connection factory

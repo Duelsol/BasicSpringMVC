@@ -49,5 +49,8 @@
     <listener>
         <listener-class>me.duelsol.springmvcseed.framework.listener.Log4j2ConfigListener</listener-class>
     </listener>
+    <listener>
+        <listener-class>me.duelsol.springmvcseed.framework.listener.TokenConfigListener</listener-class>
+    </listener>
 
 </web-app>

@@ -18,7 +18,7 @@ public interface DemoService {
 
     List<Map> findAllAccounts() throws SQLException;
 
-    DemoEntity getDemoById(int id) throws SQLException;
+    DemoEntity getDemoById(final int id) throws SQLException;
 
     void saveDemos();
 

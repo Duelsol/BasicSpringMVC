@@ -21,7 +21,7 @@ public class MessageQueueConsumer extends RabbitEndPoint implements Runnable, Co
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageQueueConsumer.class);
 
-    public MessageQueueConsumer(String queueName) throws IOException, TimeoutException {
+    public MessageQueueConsumer(final String queueName) throws IOException, TimeoutException {
         super(queueName);
     }
 

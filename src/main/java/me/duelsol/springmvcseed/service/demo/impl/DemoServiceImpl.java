@@ -28,7 +28,7 @@ public class DemoServiceImpl extends BaseService implements DemoService {
     }
 
     @Override
-    public DemoEntity getDemoById(int id) throws SQLException {
+    public DemoEntity getDemoById(final int id) throws SQLException {
         return daoFactory.getDemoDao().getDemoByID(id);
     }
 

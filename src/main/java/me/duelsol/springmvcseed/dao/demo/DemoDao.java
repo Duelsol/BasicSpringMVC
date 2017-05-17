@@ -16,6 +16,6 @@ public interface DemoDao {
 
     List<Map> findAllAccounts() throws SQLException;
 
-    DemoEntity getDemoByID(int id) throws SQLException;
+    DemoEntity getDemoByID(final int id) throws SQLException;
 
 }

@@ -15,11 +15,27 @@
     <link href="${pageContext.request.contextPath}/css/index/jumbotron-narrow.css" rel="stylesheet">
 
     <script type="text/javascript">
-        function demo() {
+        function createJWT() {
             $.ajax({
-                url: "/demo",
+                url: '/create_jwt',
+                type: 'POST',
+                success: function (data) {
+                    localStorage.setItem("token", data);
+                    common.debug("token=" + data);
+                }
+            });
+        }
+
+        function checkJWT() {
+            $.ajax({
+                url: '/check_jwt',
+                type: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("token")
+                },
                 success: function (data) {
                     common.debug(data);
+                    localStorage.clear();
                 }
             });
         }
@@ -40,7 +56,8 @@
             <h1>Jumbotron heading</h1>
             <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
             <p>
-                <a class="btn btn-lg btn-success" href="javascript:void(0)" role="button" onclick="demo()">Sign up today</a>
+                <a class="btn btn-lg btn-success" href="javascript:void(0)" role="button" onclick="createJWT()">Create JWT</a>
+                <a class="btn btn-lg btn-success" href="javascript:void(0)" role="button" onclick="checkJWT()">Check JWT</a>
             </p>
         </div>
 

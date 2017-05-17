@@ -14,11 +14,11 @@ import java.util.concurrent.TimeoutException;
  */
 public class MessageQueueProducer extends RabbitEndPoint {
 
-    public MessageQueueProducer(String queueName) throws IOException, TimeoutException {
+    public MessageQueueProducer(final String queueName) throws IOException, TimeoutException {
         super(queueName);
     }
 
-    public void sendMessage(Serializable object) throws IOException, TimeoutException {
+    public void sendMessage(final Serializable object) throws IOException, TimeoutException {
         channel.basicPublish("", queueName, null, SerializationUtils.serialize(object));
     }
 

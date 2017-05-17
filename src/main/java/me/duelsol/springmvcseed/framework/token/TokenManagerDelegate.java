@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
  * Date: 2017/5/16
  * Time: 00:12
  */
-public interface TokenDelegate {
+public interface TokenManagerDelegate {
 
     /**
      * 验证token。

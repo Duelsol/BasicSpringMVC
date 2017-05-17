@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
  * Date: 2017/5/17
  * Time: 10:35
  */
-public class EmptyTokenAdapter implements TokenDelegate {
+public class EmptyTokenManagerAdapter implements TokenManagerDelegate {
 
     @Override
     public boolean check(HttpServletRequest request, HttpServletResponse response) {

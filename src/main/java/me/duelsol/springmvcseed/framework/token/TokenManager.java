@@ -15,19 +15,19 @@ public final class TokenManager {
      * Token代理类实例，项目启动时在listener中初始化。
      * @see me.duelsol.springmvcseed.framework.listener.TokenConfigListener
      */
-    private static TokenDelegate instance = null;
+    private static TokenManagerDelegate instance = null;
 
     /**
      * 默认实现的Token代理类，方法全部为空，check返回不通过。
-     * @see EmptyTokenAdapter
+     * @see EmptyTokenManagerAdapter
      */
-    private static final TokenDelegate emptyTokenAdapter = new EmptyTokenAdapter();
+    private static final TokenManagerDelegate defaultDelegate = new EmptyTokenManagerAdapter();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TokenManager.class);
 
     private TokenManager() {}
 
-    public static void initialize(final Class<? extends TokenDelegate> delegate) {
+    public static void initialize(final Class<? extends TokenManagerDelegate> delegate) {
         if (instance == null) {
             try {
                 instance = delegate.newInstance();
@@ -37,10 +37,10 @@ public final class TokenManager {
         }
     }
 
-    public static TokenDelegate getDelegate() {
+    public static TokenManagerDelegate getDelegate() {
         if (instance == null) {
-            LOGGER.info("TokenManager的初始化方法尚未被调用，返回默认的空代理类。");
-            return emptyTokenAdapter;
+            LOGGER.info("TokenManager尚未初始化，返回默认的空代理类。");
+            return defaultDelegate;
         }
         return instance;
     }

@@ -3,7 +3,7 @@ package me.duelsol.springmvcseed.service.token;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import me.duelsol.springmvcseed.framework.token.TokenDelegate;
+import me.duelsol.springmvcseed.framework.token.TokenManagerDelegate;
 import me.duelsol.springmvcseed.framework.util.PropertiesUtils;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
@@ -20,7 +20,7 @@ import java.io.IOException;
  * Date: 2017/5/16
  * Time: 14:16
  */
-public class JWTAdapter implements TokenDelegate {
+public class JWTAdapter implements TokenManagerDelegate {
 
     private static String base64EncodedKey = null;
 

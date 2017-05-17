@@ -1,6 +1,6 @@
 package me.duelsol.springmvcseed.service.token;
 
-import me.duelsol.springmvcseed.framework.token.TokenDelegate;
+import me.duelsol.springmvcseed.framework.token.TokenManagerDelegate;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +13,7 @@ import java.util.UUID;
  * Date: 2017/5/17
  * Time: 16:25
  */
-public class SessionAdapter implements TokenDelegate {
+public class SessionAdapter implements TokenManagerDelegate {
 
     @Override
     public boolean check(HttpServletRequest request, HttpServletResponse response) {

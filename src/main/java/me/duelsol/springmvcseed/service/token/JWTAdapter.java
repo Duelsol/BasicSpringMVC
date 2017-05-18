@@ -57,7 +57,7 @@ public class JWTAdapter implements TokenManagerDelegate {
         try {
             response.getWriter().write(token);
         } catch (IOException e) {
-            LOGGER.error("response写入JWT时发生错误，token=" + token, e);
+            LOGGER.error("JWT写入response时发生错误，token=" + token, e);
         }
     }
 

@@ -11,6 +11,8 @@ repositories {
 }
 
 ext {
+    jackson_version = '2.8.7'
+    log4j_version = '2.8.2'
     springframework_version = '4.3.7.RELEASE'
 }
 
@@ -21,11 +23,8 @@ dependencies {
             "aopalliance:aopalliance:1.0",
             "org.aspectj:aspectjweaver:1.8.2",
             "taglibs:standard:1.1.2",
-            "org.mybatis:mybatis:3.2.8",
-            "org.mybatis:mybatis-spring:1.2.2",
-            "mysql:mysql-connector-java:5.1.37",
-            "com.fasterxml.jackson.core:jackson-core:2.8.7",
-            "com.fasterxml.jackson.core:jackson-databind:2.8.7",
+            "com.fasterxml.jackson.core:jackson-core:$jackson_version",
+            "com.fasterxml.jackson.core:jackson-databind:$jackson_version",
             "net.sf.json-lib:json-lib:2.4:jdk15",
             "com.rabbitmq:amqp-client:4.1.0",
             "io.jsonwebtoken:jjwt:0.7.0",
@@ -35,9 +34,9 @@ dependencies {
             "javax.servlet:servlet-api:2.5",
 
             "org.slf4j:slf4j-api:1.7.25",
-            "org.apache.logging.log4j:log4j-core:2.8.2",
-            "org.apache.logging.log4j:log4j-api:2.8.2",
-            "org.apache.logging.log4j:log4j-slf4j-impl:2.8.2",
+            "org.apache.logging.log4j:log4j-core:$log4j_version",
+            "org.apache.logging.log4j:log4j-api:$log4j_version",
+            "org.apache.logging.log4j:log4j-slf4j-impl:$log4j_version",
 
             "org.apache.commons:commons-collections4:4.1",
             "org.apache.commons:commons-dbcp2:2.1.1",
@@ -48,6 +47,12 @@ dependencies {
             "commons-io:commons-io:2.5",
             "commons-beanutils:commons-beanutils:1.9.2",
             "commons-logging:commons-logging:1.2",
+
+            "mysql:mysql-connector-java:5.1.37",
+            "redis.clients:jedis:2.9.0",
+            "org.springframework.data:spring-data-redis:1.8.3.RELEASE",
+            "org.mybatis:mybatis:3.2.8",
+            "org.mybatis:mybatis-spring:1.2.2",
 
             "org.springframework:spring-aop:$springframework_version",
             "org.springframework:spring-beans:$springframework_version",

@@ -3,8 +3,11 @@ package me.duelsol.springmvcseed.service;
 import me.duelsol.springmvcseed.dao.DaoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,5 +22,11 @@ public class BaseService {
 
     @Resource(name = "taskExecutor")
     protected TaskExecutor taskExecutor;
+
+    @Resource(name = "redisTemplate")
+    protected RedisTemplate<String, Serializable> redisTemplate;
+
+    @Resource(name = "stringRedisTemplate")
+    protected StringRedisTemplate stringRedisTemplate;
 
 }

@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.Date;
 
@@ -17,7 +18,7 @@ import java.util.Date;
  * Date: 14/10/21
  * Time: 20:02
  */
-public abstract class BaseEntity {
+public abstract class BaseEntity implements Cloneable, Serializable {
 
     private Integer id = null;
     private Date createTime = null;

@@ -1,6 +1,7 @@
 package me.duelsol.springmvcseed.service.token;
 
 import me.duelsol.springmvcseed.framework.token.TokenManagerDelegate;
+import me.duelsol.springmvcseed.service.BaseService;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,24 +14,33 @@ import java.util.UUID;
  * Date: 2017/5/17
  * Time: 16:25
  */
-public class SessionAdapter implements TokenManagerDelegate {
+public class SessionAdapter extends BaseService implements TokenManagerDelegate {
 
     @Override
-    public boolean check(HttpServletRequest request, HttpServletResponse response) {
-        String serverToken = (String) request.getSession(false).getAttribute("token");
-        String clientToken = request.getParameter("token");
-        if (serverToken == null || clientToken == null) {
+    public boolean check(String token) {
+        String serverToken = stringRedisTemplate.opsForValue().get("token");
+        if (serverToken == null || token == null) {
             return false;
-        } else if (!StringUtils.equals(serverToken, clientToken)) {
+        } else if (!StringUtils.equals(serverToken, token)) {
             return false;
         }
         return true;
     }
 
     @Override
-    public void create(HttpServletRequest request, HttpServletResponse response) {
+    public String generate() {
         // 这里的UUID只是作为例子，实际中根据需要自己构造token并加密，形如"用户ID+过期时间+其他"等。
-        request.getSession(false).setAttribute("token", UUID.randomUUID().toString());
+        return UUID.randomUUID().toString();
+    }
+
+    @Override
+    public void set(String token, HttpServletRequest request, HttpServletResponse response) {
+        request.getSession(false).setAttribute("token", token);
+    }
+
+    @Override
+    public String get(HttpServletRequest request) {
+        return (String) request.getSession(false).getAttribute("token");
     }
 
     @Override

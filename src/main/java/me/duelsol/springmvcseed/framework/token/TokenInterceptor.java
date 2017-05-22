@@ -27,7 +27,8 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
                 TokenBehaviour behaviour = annotation.behaviour();
                 // TokenBehaviour.create时不需要验证token。
                 if (behaviour != TokenBehaviour.create) {
-                    boolean check = TokenManager.getDelegate().check(request, response);
+                    String token = TokenManager.getDelegate().get(request);
+                    boolean check = TokenManager.getDelegate().check(token);
                     if (!check) {
                         return false;
                     }
@@ -51,7 +52,8 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
                 TokenBehaviour behaviour = annotation.behaviour();
                 // TokenBehaviour.create或TokenBehaviour.refresh时，生成token。
                 if (behaviour == TokenBehaviour.create || behaviour == TokenBehaviour.refresh) {
-                    TokenManager.getDelegate().create(request, response);
+                    String token = TokenManager.getDelegate().generate();
+                    TokenManager.getDelegate().set(token, request, response);
                 }
             }
         }

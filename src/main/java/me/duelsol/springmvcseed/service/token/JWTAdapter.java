@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import me.duelsol.springmvcseed.framework.token.TokenManagerDelegate;
 import me.duelsol.springmvcseed.framework.util.PropertiesUtils;
+import me.duelsol.springmvcseed.service.BaseService;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -20,7 +21,7 @@ import java.io.IOException;
  * Date: 2017/5/16
  * Time: 14:16
  */
-public class JWTAdapter implements TokenManagerDelegate {
+public class JWTAdapter extends BaseService implements TokenManagerDelegate {
 
     private static String base64EncodedKey = null;
 
@@ -32,28 +33,29 @@ public class JWTAdapter implements TokenManagerDelegate {
     }
 
     @Override
-    public boolean check(HttpServletRequest request, HttpServletResponse response) {
-        String authorization = request.getHeader("Authorization");
-        if (StringUtils.isNotBlank(authorization) && authorization.startsWith("Bearer ")) {
-            String token = authorization.substring("Bearer ".length());
-            try {
-                Claims claims = parse(token);
-                if (claims != null) {
-                    String subject = PropertiesUtils.getProperty("jwt.subject");
-                    if (claims.getSubject().equals(subject)) {
-                        return true;
-                    }
+    public boolean check(String token) {
+        try {
+            Claims claims = Jwts.parser().setSigningKey(base64EncodedKey).parseClaimsJws(token).getBody();
+            if (claims != null) {
+                String subject = PropertiesUtils.getProperty("jwt.subject");
+                if (claims.getSubject().equals(subject)) {
+                    return true;
                 }
-            } catch (RuntimeException e) {
-                LOGGER.error("验证JWT时发生错误，token=" + token, e);
             }
+        } catch (RuntimeException e) {
+            LOGGER.error("验证JWT时发生错误，token=" + token, e);
         }
         return false;
     }
 
     @Override
-    public void create(HttpServletRequest request, HttpServletResponse response) {
-        String token = generate();
+    public String generate() {
+        String subject = PropertiesUtils.getProperty("jwt.subject");
+        return Jwts.builder().setSubject(subject).signWith(SignatureAlgorithm.HS256, base64EncodedKey).compact();
+    }
+
+    @Override
+    public void set(String token, HttpServletRequest request, HttpServletResponse response) {
         try {
             response.getWriter().write(token);
         } catch (IOException e) {
@@ -62,17 +64,17 @@ public class JWTAdapter implements TokenManagerDelegate {
     }
 
     @Override
+    public String get(HttpServletRequest request) {
+        String authorization = request.getHeader("Authorization");
+        if (StringUtils.isNotBlank(authorization) && authorization.startsWith("Bearer ")) {
+            return authorization.substring("Bearer ".length());
+        }
+        return null;
+    }
+
+    @Override
     public void remove(HttpServletRequest request, HttpServletResponse response) {
         // JWT实现方式下的remove，这里可以执行将token加入黑名单保存到Redis等操作。
-    }
-
-    private String generate() {
-        String subject = PropertiesUtils.getProperty("jwt.subject");
-        return Jwts.builder().setSubject(subject).signWith(SignatureAlgorithm.HS256, base64EncodedKey).compact();
-    }
-
-    private Claims parse(String claimsJws) {
-        return Jwts.parser().setSigningKey(base64EncodedKey).parseClaimsJws(claimsJws).getBody();
     }
 
 }

@@ -16,12 +16,22 @@ public interface TokenManagerDelegate {
      *
      * @return 验证通过返回true，否则返回false。
      */
-    boolean check(HttpServletRequest request, HttpServletResponse response);
+    boolean check(String token);
 
     /**
      * 生成token。
      */
-    void create(HttpServletRequest request, HttpServletResponse response);
+    String generate();
+
+    /**
+     * 赋值token。
+     */
+    void set(String token, HttpServletRequest request, HttpServletResponse response);
+
+    /**
+     * 获取token。
+     */
+    String get(HttpServletRequest request);
 
     /**
      * 移除token。

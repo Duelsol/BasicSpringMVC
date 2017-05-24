@@ -12,6 +12,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Token {
 
-    TokenBehaviour behaviour() default TokenBehaviour.common;
+    TokenBehaviour behaviour() default TokenBehaviour.DEFAULT;
 
 }

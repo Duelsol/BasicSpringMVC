@@ -50,7 +50,7 @@ public class DemoController extends BaseController {
 
     @RequestMapping(value = "/create_jwt", method = RequestMethod.POST)
     @ResponseBody
-    @Token(behaviour = TokenBehaviour.create)
+    @Token(behaviour = TokenBehaviour.CREATE)
     public void createJWT() {
     }
 

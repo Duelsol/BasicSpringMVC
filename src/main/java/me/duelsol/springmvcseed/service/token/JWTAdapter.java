@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * Created by IntelliJ IDEA.
@@ -56,8 +57,9 @@ public class JWTAdapter extends BaseService implements TokenManagerDelegate {
 
     @Override
     public void set(String token, HttpServletRequest request, HttpServletResponse response) {
-        try {
-            response.getWriter().write(token);
+        try (OutputStream outputStream = response.getOutputStream()) {
+            outputStream.write(token.getBytes());
+            outputStream.flush();
         } catch (IOException e) {
             LOGGER.error("JWT写入response时发生错误，token=" + token, e);
         }

@@ -1,7 +1,9 @@
 package me.duelsol.springmvcseed.framework.token;
 
+import me.duelsol.springmvcseed.framework.ApplicationContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,8 +14,13 @@ import org.slf4j.LoggerFactory;
 public final class TokenManager {
 
     /**
-     * Token代理类实例，项目启动时在listener中初始化。
+     * Token代理类Class，项目启动时在listener中初始化。
      * @see me.duelsol.springmvcseed.framework.listener.TokenConfigListener
+     */
+    private static Class<? extends TokenManagerDelegate> storagedDelegate = null;
+
+    /**
+     * Token代理类实例，在初始化了代理类Class后，先尝试从Spring上下文中获取，如果获取失败则调用newInstance创建。
      */
     private static TokenManagerDelegate instance = null;
 
@@ -28,19 +35,29 @@ public final class TokenManager {
     private TokenManager() {}
 
     public static void initialize(final Class<? extends TokenManagerDelegate> delegate) {
-        if (instance == null) {
-            try {
-                instance = delegate.newInstance();
-            } catch (InstantiationException | IllegalAccessException e) {
-                LOGGER.error("TokenManager初始化时发生错误", e);
-            }
+        if (storagedDelegate == null) {
+            storagedDelegate = delegate;
         }
     }
 
     public static TokenManagerDelegate getDelegate() {
-        if (instance == null) {
-            LOGGER.info("TokenManager尚未初始化，返回默认的空代理类。");
+        if (storagedDelegate == null) {
+            LOGGER.debug("TokenManager尚未初始化，返回默认的空代理类。");
             return defaultDelegate;
+        }
+        if (instance == null) {
+            try {
+                instance = ApplicationContextHolder.getInstance().getBean(storagedDelegate);
+            } catch (BeansException e) {
+                LOGGER.error("TokenManager代理初始化时从Spring上下文中获取Bean发生错误，className=" + storagedDelegate.getName(), e);
+            }
+            if (instance == null) {
+                try {
+                    instance = storagedDelegate.newInstance();
+                } catch (InstantiationException | IllegalAccessException e) {
+                    LOGGER.error("TokenManager代理初始化时调用newInstance发生错误，className=" + storagedDelegate.getName(), e);
+                }
+            }
         }
         return instance;
     }

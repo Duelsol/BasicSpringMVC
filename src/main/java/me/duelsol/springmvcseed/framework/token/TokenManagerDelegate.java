@@ -12,30 +12,45 @@ import javax.servlet.http.HttpServletResponse;
 public interface TokenManagerDelegate {
 
     /**
-     * 验证token。
-     *
-     * @return 验证通过返回true，否则返回false。
-     */
-    boolean check(String token);
-
-    /**
      * 生成token。
      */
     String generate();
 
     /**
-     * 赋值token。
+     * 验证token。
+     *
+     * @return 验证通过返回true，否则返回false。
      */
-    void set(String token, HttpServletRequest request, HttpServletResponse response);
+    boolean validate(String token);
+
+    /**
+     * 将token置入request或response。
+     */
+    void position(String token, HttpServletRequest request, HttpServletResponse response);
+
+    /**
+     * 缓存token.
+     */
+    void cache(String key, String token);
 
     /**
      * 获取token。
      */
-    String get(HttpServletRequest request);
+    String getToken(HttpServletRequest request);
+
+    /**
+     * 从缓存中获取token。
+     */
+    String getCachedToken(String key);
 
     /**
      * 移除token。
      */
-    void remove(HttpServletRequest request, HttpServletResponse response);
+    void removeToken(HttpServletRequest request);
+
+    /**
+     * 从缓存中移除token。
+     */
+    void removeCachedToken(String key);
 
 }

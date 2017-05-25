@@ -26,9 +26,9 @@
             });
         }
 
-        function checkJWT() {
+        function validateJWT() {
             $.ajax({
-                url: '/check_jwt',
+                url: '/validate_jwt',
                 type: 'POST',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("token")
@@ -57,7 +57,7 @@
             <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
             <p>
                 <a class="btn btn-lg btn-success" href="javascript:void(0)" role="button" onclick="createJWT()">Create JWT</a>
-                <a class="btn btn-lg btn-success" href="javascript:void(0)" role="button" onclick="checkJWT()">Check JWT</a>
+                <a class="btn btn-lg btn-success" href="javascript:void(0)" role="button" onclick="validateJWT()">Validate JWT</a>
             </p>
         </div>
 

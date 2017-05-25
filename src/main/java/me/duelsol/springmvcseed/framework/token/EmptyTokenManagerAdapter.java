@@ -12,26 +12,39 @@ import javax.servlet.http.HttpServletResponse;
 public class EmptyTokenManagerAdapter implements TokenManagerDelegate {
 
     @Override
-    public boolean check(String token) {
-        return false;
-    }
-
-    @Override
     public String generate() {
         return null;
     }
 
     @Override
-    public void set(String token, HttpServletRequest request, HttpServletResponse response) {
+    public boolean validate(String token) {
+        return false;
     }
 
     @Override
-    public String get(HttpServletRequest request) {
+    public void position(String token, HttpServletRequest request, HttpServletResponse response) {
+    }
+
+    @Override
+    public void cache(String key, String token) {
+    }
+
+    @Override
+    public String getToken(HttpServletRequest request) {
         return null;
     }
 
     @Override
-    public void remove(HttpServletRequest request, HttpServletResponse response) {
+    public String getCachedToken(String key) {
+        return null;
+    }
+
+    @Override
+    public void removeToken(HttpServletRequest request) {
+    }
+
+    @Override
+    public void removeCachedToken(String key) {
     }
 
 }

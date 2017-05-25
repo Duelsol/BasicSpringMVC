@@ -10,6 +10,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ import java.io.OutputStream;
  * Date: 2017/5/16
  * Time: 14:16
  */
+@Service
 public class JWTAdapter extends BaseService implements TokenManagerDelegate {
 
     private static String base64EncodedKey = null;
@@ -34,7 +36,13 @@ public class JWTAdapter extends BaseService implements TokenManagerDelegate {
     }
 
     @Override
-    public boolean check(String token) {
+    public String generate() {
+        String subject = PropertiesUtils.getProperty("jwt.subject");
+        return Jwts.builder().setSubject(subject).signWith(SignatureAlgorithm.HS256, base64EncodedKey).compact();
+    }
+
+    @Override
+    public boolean validate(String token) {
         try {
             Claims claims = Jwts.parser().setSigningKey(base64EncodedKey).parseClaimsJws(token).getBody();
             if (claims != null) {
@@ -50,13 +58,7 @@ public class JWTAdapter extends BaseService implements TokenManagerDelegate {
     }
 
     @Override
-    public String generate() {
-        String subject = PropertiesUtils.getProperty("jwt.subject");
-        return Jwts.builder().setSubject(subject).signWith(SignatureAlgorithm.HS256, base64EncodedKey).compact();
-    }
-
-    @Override
-    public void set(String token, HttpServletRequest request, HttpServletResponse response) {
+    public void position(String token, HttpServletRequest request, HttpServletResponse response) {
         try (OutputStream outputStream = response.getOutputStream()) {
             outputStream.write(token.getBytes());
             outputStream.flush();
@@ -66,7 +68,12 @@ public class JWTAdapter extends BaseService implements TokenManagerDelegate {
     }
 
     @Override
-    public String get(HttpServletRequest request) {
+    public void cache(String key, String token) {
+        stringRedisTemplate.opsForValue().set(key, token);
+    }
+
+    @Override
+    public String getToken(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
         if (StringUtils.isNotBlank(authorization) && authorization.startsWith("Bearer ")) {
             return authorization.substring("Bearer ".length());
@@ -75,8 +82,18 @@ public class JWTAdapter extends BaseService implements TokenManagerDelegate {
     }
 
     @Override
-    public void remove(HttpServletRequest request, HttpServletResponse response) {
+    public String getCachedToken(String key) {
+        return stringRedisTemplate.opsForValue().get(key);
+    }
+
+    @Override
+    public void removeToken(HttpServletRequest request) {
         // JWT实现方式下的remove，这里可以执行将token加入黑名单保存到Redis等操作。
+    }
+
+    @Override
+    public void removeCachedToken(String key) {
+        stringRedisTemplate.delete(key);
     }
 
 }

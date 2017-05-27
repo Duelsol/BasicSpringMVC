@@ -4,9 +4,9 @@
 
 <mapper namespace="demoDao">
 
-    <select id="findAllAccounts" resultType="java.util.HashMap">
+    <select id="selectAllDemos" resultType="java.util.HashMap">
         <![CDATA[
-        select * from footprint_account
+        select * from footprint_demo
         ]]>
     </select>
 

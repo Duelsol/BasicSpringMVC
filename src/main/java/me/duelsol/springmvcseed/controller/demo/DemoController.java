@@ -32,10 +32,10 @@ public class DemoController extends BaseController {
 
     @RequestMapping(value = "/demo")
     @ResponseBody
-    @Cacheable(value = "default", key = "new String('allAccounts')")
-    public Object findAllAccounts() {
+    @Cacheable(value = "default", key = "new String('allDemos')")
+    public Object selectAllDemos() {
         try {
-            return serviceFactory.getDemoService().findAllAccounts();
+            return serviceFactory.getDemoService().selectAllDemos();
         } catch (SQLException e) {
             LOGGER.error("获取所有账户时发生错误", e);
         }

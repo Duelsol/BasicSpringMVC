@@ -16,7 +16,7 @@ import java.util.concurrent.TimeoutException;
  */
 public interface DemoService {
 
-    List<Map> findAllAccounts() throws SQLException;
+    List<Map> selectAllDemos() throws SQLException;
 
     DemoEntity getDemoById(final int id) throws SQLException;
 

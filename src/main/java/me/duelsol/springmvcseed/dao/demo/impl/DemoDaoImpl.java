@@ -19,8 +19,8 @@ import java.util.Map;
 public class DemoDaoImpl extends BaseDao implements DemoDao {
 
     @Override
-    public List<Map> findAllAccounts() throws SQLException {
-        return sqlSessionTemplate.selectList("demoDao.findAllAccounts");
+    public List<Map> selectAllDemos() throws SQLException {
+        return sqlSessionTemplate.selectList("demoDao.selectAllDemos");
     }
 
     @Override

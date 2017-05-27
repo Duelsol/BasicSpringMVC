@@ -23,8 +23,8 @@ import java.util.concurrent.TimeoutException;
 public class DemoServiceImpl extends BaseService implements DemoService {
 
     @Override
-    public List<Map> findAllAccounts() throws SQLException {
-        return daoFactory.getDemoDao().findAllAccounts();
+    public List<Map> selectAllDemos() throws SQLException {
+        return daoFactory.getDemoDao().selectAllDemos();
     }
 
     @Override

@@ -68,11 +68,6 @@ public class JWTAdapter extends BaseService implements TokenManagerDelegate {
     }
 
     @Override
-    public void cache(String key, String token) {
-        stringRedisTemplate.opsForValue().set(key, token);
-    }
-
-    @Override
     public String getToken(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
         if (StringUtils.isNotBlank(authorization) && authorization.startsWith("Bearer ")) {
@@ -82,18 +77,8 @@ public class JWTAdapter extends BaseService implements TokenManagerDelegate {
     }
 
     @Override
-    public String getCachedToken(String key) {
-        return stringRedisTemplate.opsForValue().get(key);
-    }
-
-    @Override
     public void removeToken(HttpServletRequest request) {
         // JWT实现方式下的remove，这里可以执行将token加入黑名单保存到Redis等操作。
-    }
-
-    @Override
-    public void removeCachedToken(String key) {
-        stringRedisTemplate.delete(key);
     }
 
 }

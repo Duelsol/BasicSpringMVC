@@ -26,25 +26,12 @@ public class EmptyTokenManagerAdapter implements TokenManagerDelegate {
     }
 
     @Override
-    public void cache(String key, String token) {
-    }
-
-    @Override
     public String getToken(HttpServletRequest request) {
         return null;
     }
 
     @Override
-    public String getCachedToken(String key) {
-        return null;
-    }
-
-    @Override
     public void removeToken(HttpServletRequest request) {
-    }
-
-    @Override
-    public void removeCachedToken(String key) {
     }
 
 }

@@ -29,28 +29,13 @@ public interface TokenManagerDelegate {
     void position(String token, HttpServletRequest request, HttpServletResponse response);
 
     /**
-     * 缓存token.
-     */
-    void cache(String key, String token);
-
-    /**
      * 获取token。
      */
     String getToken(HttpServletRequest request);
 
     /**
-     * 从缓存中获取token。
-     */
-    String getCachedToken(String key);
-
-    /**
      * 移除token。
      */
     void removeToken(HttpServletRequest request);
-
-    /**
-     * 从缓存中移除token。
-     */
-    void removeCachedToken(String key);
 
 }

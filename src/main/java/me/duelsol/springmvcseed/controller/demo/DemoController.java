@@ -7,6 +7,7 @@ import me.duelsol.springmvcseed.framework.token.annotation.Token;
 import me.duelsol.springmvcseed.framework.token.annotation.TokenBehaviour;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,7 @@ public class DemoController extends BaseController {
 
     @RequestMapping(value = "/demo")
     @ResponseBody
+    @Cacheable(value = "default", key = "new String('allAccounts')")
     public Object findAllAccounts() {
         try {
             return serviceFactory.getDemoService().findAllAccounts();

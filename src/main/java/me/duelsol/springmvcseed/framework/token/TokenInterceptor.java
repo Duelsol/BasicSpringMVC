@@ -1,10 +1,12 @@
 package me.duelsol.springmvcseed.framework.token;
 
+import me.duelsol.springmvcseed.framework.cache.CacheManager;
 import me.duelsol.springmvcseed.framework.token.annotation.DuplicateSubmissionsChecker;
 import me.duelsol.springmvcseed.framework.token.annotation.DuplicateSubmissionsSource;
 import me.duelsol.springmvcseed.framework.token.annotation.Token;
 import me.duelsol.springmvcseed.framework.token.annotation.TokenBehaviour;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.cache.Cache;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -28,12 +30,12 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
             Method method = handlerMethod.getMethod();
             Token tokenAnnotation = method.getAnnotation(Token.class);
             if (tokenAnnotation != null) {
-                TokenManagerDelegate delegate = TokenManager.getDelegate();
                 // TokenBehaviour.create时不需要验证token。
                 TokenBehaviour behaviour = tokenAnnotation.behaviour();
                 if (behaviour != TokenBehaviour.CREATE) {
-                    String token = delegate.getToken(request);
-                    boolean check = delegate.validate(token);
+                    TokenManagerDelegate tokenDelegate = TokenManager.getDelegate();
+                    String token = tokenDelegate.getToken(request);
+                    boolean check = tokenDelegate.validate(token);
                     if (!check) {
                         return false;
                     }
@@ -46,14 +48,16 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
                     */
                     DuplicateSubmissionsChecker dscAnnotation = method.getAnnotation(DuplicateSubmissionsChecker.class);
                     if (dscAnnotation != null) {
+                        Cache cacheDelegate = CacheManager.getDelegate();
                         String key = dscAnnotation.key() + "_" + request.getSession().getId();
-                        String cachedToken = delegate.getCachedToken(key);
+                        Cache.ValueWrapper wrapper = cacheDelegate.get(key);
+                        String cachedToken = wrapper != null ? wrapper.get().toString() : null;
                         if (token == null || cachedToken == null) {
                             return false;
                         } else if (!token.equals(cachedToken)) {
                             return false;
                         }
-                        delegate.removeCachedToken(key);
+                        cacheDelegate.evict(key);
                     }
                 }
             }
@@ -88,7 +92,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
                 if (dssAnnotation != null && behaviour != TokenBehaviour.REMOVE) {
                     String key = dssAnnotation.key() + "_" + request.getSession().getId();
                     if (StringUtils.isNotBlank(token)) {
-                        delegate.cache(key, token);
+                        CacheManager.getDelegate().put(key, token);
                     }
                 }
             }

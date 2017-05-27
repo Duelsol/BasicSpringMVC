@@ -58,26 +58,30 @@ public class JWTAdapter extends BaseService implements TokenManagerDelegate {
     }
 
     @Override
-    public void position(String token, HttpServletRequest request, HttpServletResponse response) {
-        try (OutputStream outputStream = response.getOutputStream()) {
-            outputStream.write(token.getBytes());
-            outputStream.flush();
-        } catch (IOException e) {
-            LOGGER.error("JWT写入response时发生错误，token=" + token, e);
+    public void put(String token, Object target) {
+        if (target instanceof HttpServletResponse) {
+            try (OutputStream outputStream = ((HttpServletResponse) target).getOutputStream()) {
+                outputStream.write(token.getBytes());
+                outputStream.flush();
+            } catch (IOException e) {
+                LOGGER.error("JWT写入response时发生错误，token=" + token, e);
+            }
         }
     }
 
     @Override
-    public String getToken(HttpServletRequest request) {
-        String authorization = request.getHeader("Authorization");
-        if (StringUtils.isNotBlank(authorization) && authorization.startsWith("Bearer ")) {
-            return authorization.substring("Bearer ".length());
+    public String get(Object target) {
+        if (target instanceof HttpServletRequest) {
+            String authorization = ((HttpServletRequest) target).getHeader("Authorization");
+            if (StringUtils.isNotBlank(authorization) && authorization.startsWith("Bearer ")) {
+                return authorization.substring("Bearer ".length());
+            }
         }
         return null;
     }
 
     @Override
-    public void removeToken(HttpServletRequest request) {
+    public void remove(String token, Object target) {
         // JWT实现方式下的remove，这里可以执行将token加入黑名单保存到Redis等操作。
     }
 

@@ -34,7 +34,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
                 TokenBehaviour behaviour = tokenAnnotation.behaviour();
                 if (behaviour != TokenBehaviour.CREATE) {
                     TokenManagerDelegate tokenDelegate = TokenManager.getDelegate();
-                    String token = tokenDelegate.getToken(request);
+                    String token = tokenDelegate.get(request);
                     boolean check = tokenDelegate.validate(token);
                     if (!check) {
                         return false;
@@ -73,18 +73,18 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
             Token tokenAnnotation = method.getAnnotation(Token.class);
             if (tokenAnnotation != null) {
                 TokenManagerDelegate delegate = TokenManager.getDelegate();
-                TokenBehaviour behaviour = tokenAnnotation.behaviour();
+                String token = delegate.get(request);
                 // TokenBehaviour.remove或TokenBehaviour.refresh时，移除token。
+                TokenBehaviour behaviour = tokenAnnotation.behaviour();
                 if (behaviour == TokenBehaviour.REMOVE || behaviour == TokenBehaviour.REFRESH) {
-                    delegate.removeToken(request);
+                    delegate.remove(token, request);
                 }
                 // TokenBehaviour.create或TokenBehaviour.refresh时，生成token。
-                String token = delegate.getToken(request);
                 if (behaviour == TokenBehaviour.CREATE || behaviour == TokenBehaviour.REFRESH) {
                     ResponseBody rbAnnotation = method.getAnnotation(ResponseBody.class);
                     if (rbAnnotation != null) {
                         token = delegate.generate();
-                        delegate.position(token, request, response);
+                        delegate.put(token, response);
                     }
                 }
                 // DuplicateSubmissionsSource是防止重复提交的前置条件，所注解的方法会将token放入缓存。

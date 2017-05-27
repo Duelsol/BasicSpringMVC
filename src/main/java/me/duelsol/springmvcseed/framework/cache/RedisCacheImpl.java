@@ -44,14 +44,8 @@ final class RedisCacheImpl implements Cache {
         if (key == null) {
             return null;
         }
-        Object result = redisTemplate.execute((RedisCallback<Object>) connection -> {
-            byte[] value = connection.get(key.toString().getBytes());
-            if (value == null) {
-                return null;
-            }
-            return SerializationUtils.deserialize(value);
-        });
-        return result == null ? null : new SimpleValueWrapper(result);
+        byte[] result = redisTemplate.execute((RedisCallback<byte[]>) connection -> connection.get(key.toString().getBytes()));
+        return result == null ? null : new SimpleValueWrapper(SerializationUtils.deserialize(result));
     }
 
     @SuppressWarnings("unchecked")
@@ -101,9 +95,6 @@ final class RedisCacheImpl implements Cache {
         Object result = redisTemplate.execute((RedisCallback<Object>) connection -> {
             byte[] resultValue = SerializationUtils.serialize((Serializable) value);
             connection.set(key.toString().getBytes(), resultValue);
-            if (resultValue == null) {
-                return null;
-            }
             return resultValue;
         });
         return result == null ? null : new SimpleValueWrapper(result);

@@ -22,16 +22,16 @@ public class EmptyTokenManagerAdapter implements TokenManagerDelegate {
     }
 
     @Override
-    public void position(String token, HttpServletRequest request, HttpServletResponse response) {
+    public void put(String token, Object target) {
     }
 
     @Override
-    public String getToken(HttpServletRequest request) {
+    public String get(Object target) {
         return null;
     }
 
     @Override
-    public void removeToken(HttpServletRequest request) {
+    public void remove(String token, Object target) {
     }
 
 }

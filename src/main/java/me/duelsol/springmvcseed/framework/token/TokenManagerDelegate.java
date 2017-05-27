@@ -1,8 +1,5 @@
 package me.duelsol.springmvcseed.framework.token;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * Created by IntelliJ IDEA.
  * User: 冯奕骅
@@ -26,16 +23,16 @@ public interface TokenManagerDelegate {
     /**
      * 将token置入request或response。
      */
-    void position(String token, HttpServletRequest request, HttpServletResponse response);
+    void put(String token, Object target);
 
     /**
      * 获取token。
      */
-    String getToken(HttpServletRequest request);
+    String get(Object target);
 
     /**
      * 移除token。
      */
-    void removeToken(HttpServletRequest request);
+    void remove(String token, Object target);
 
 }

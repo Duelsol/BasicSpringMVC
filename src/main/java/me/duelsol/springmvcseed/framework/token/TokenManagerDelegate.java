@@ -21,7 +21,7 @@ public interface TokenManagerDelegate {
     boolean validate(String token);
 
     /**
-     * 将token置入request或response。
+     * 放置token。
      */
     void put(String token, Object target);
 

@@ -40,7 +40,7 @@ public abstract class BaseEntity implements Cloneable, Serializable {
         KeyHolder keyholder = new GeneratedKeyHolder();
 
         if (id == null) {
-            sql.append("insert into ").append(tableName).append(" (id, createTime, updateTime");
+            sql.append("insert into ").append(tableName).append(" (id, create_time, update_time");
             StringBuilder values = new StringBuilder("(null, :createTime, :updateTime");
             for (Field field : fields) {
                 String name = field.getName();
@@ -56,7 +56,7 @@ public abstract class BaseEntity implements Cloneable, Serializable {
 
             this.setId(keyholder.getKey().intValue());
         } else {
-            sql.append("update ").append(tableName).append(" set updateTime = :updateTime");
+            sql.append("update ").append(tableName).append(" set update_time = :updateTime");
             for (Field field : fields) {
                 String name = field.getName();
                 sql.append(", ").append(name).append(" = :").append(name);

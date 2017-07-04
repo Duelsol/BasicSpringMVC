@@ -15,7 +15,7 @@ public class DemoEntity extends BaseEntity {
 
     @Override
     public String getTableName() {
-        return "footprint_demo";
+        return "springmvc_demo";
     }
 
     public int getAmount() {

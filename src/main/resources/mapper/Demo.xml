@@ -6,13 +6,13 @@
 
     <select id="selectAllDemos" resultType="java.util.HashMap">
         <![CDATA[
-        select * from footprint_demo
+        select * from springmvc_demo
         ]]>
     </select>
 
     <select id="getDemoByID" parameterType="int" resultType="me.duelsol.springmvcseed.entity.demo.DemoEntity">
         <![CDATA[
-        select * from footprint_demo where id = #{id}
+        select * from springmvc_demo where id = #{id}
         ]]>
     </select>
 

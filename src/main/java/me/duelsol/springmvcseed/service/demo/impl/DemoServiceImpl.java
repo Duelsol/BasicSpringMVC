@@ -1,10 +1,12 @@
 package me.duelsol.springmvcseed.service.demo.impl;
 
+import me.duelsol.springmvcseed.dao.demo.DemoDao;
 import me.duelsol.springmvcseed.entity.demo.DemoEntity;
 import me.duelsol.springmvcseed.framework.messagequeue.MessageQueueConsumer;
 import me.duelsol.springmvcseed.framework.messagequeue.MessageQueueProducer;
 import me.duelsol.springmvcseed.service.BaseService;
 import me.duelsol.springmvcseed.service.demo.DemoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -22,14 +24,17 @@ import java.util.concurrent.TimeoutException;
 @Service
 public class DemoServiceImpl extends BaseService implements DemoService {
 
+    @Autowired
+    private DemoDao demoDao;
+
     @Override
     public List<Map> selectAllDemos() throws SQLException {
-        return daoFactory.getDemoDao().selectAllDemos();
+        return demoDao.selectAllDemos();
     }
 
     @Override
     public DemoEntity getDemoById(final int id) throws SQLException {
-        return daoFactory.getDemoDao().getDemoByID(id);
+        return demoDao.getDemoByID(id);
     }
 
     @Override

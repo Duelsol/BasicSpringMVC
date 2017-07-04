@@ -1,7 +1,5 @@
 package me.duelsol.springmvcseed.service;
 
-import me.duelsol.springmvcseed.dao.DaoFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 
 import javax.annotation.Resource;
@@ -13,9 +11,6 @@ import javax.annotation.Resource;
  * Time: 11:35
  */
 public class BaseService {
-
-    @Autowired
-    protected DaoFactory daoFactory;
 
     @Resource(name = "taskExecutor")
     protected TaskExecutor taskExecutor;

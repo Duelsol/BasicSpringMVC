@@ -1,12 +1,13 @@
 package me.duelsol.springmvcseed.controller.demo;
 
-import me.duelsol.springmvcseed.controller.BaseController;
 import me.duelsol.springmvcseed.framework.token.annotation.DuplicateSubmissionsChecker;
 import me.duelsol.springmvcseed.framework.token.annotation.DuplicateSubmissionsSource;
 import me.duelsol.springmvcseed.framework.token.annotation.Token;
 import me.duelsol.springmvcseed.framework.token.annotation.TokenBehaviour;
+import me.duelsol.springmvcseed.service.demo.DemoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,7 +21,10 @@ import java.util.concurrent.TimeoutException;
 
 @Controller
 @RequestMapping("/")
-public class DemoController extends BaseController {
+public class DemoController {
+
+    @Autowired
+    private DemoService demoService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DemoController.class);
 
@@ -35,7 +39,7 @@ public class DemoController extends BaseController {
     @Cacheable(value = "default", key = "new String('allDemos')")
     public Object selectAllDemos() {
         try {
-            return serviceFactory.getDemoService().selectAllDemos();
+            return demoService.selectAllDemos();
         } catch (SQLException e) {
             LOGGER.error("获取所有账户时发生错误", e);
         }
@@ -46,7 +50,7 @@ public class DemoController extends BaseController {
     @ResponseBody
     public void testMessageQueue() {
         try {
-            serviceFactory.getDemoService().testMessageQueue();
+            demoService.testMessageQueue();
         } catch (IOException | TimeoutException e) {
             LOGGER.error("启动消息队列时发生错误", e);
         }

@@ -156,7 +156,7 @@
         </tx:attributes>
     </tx:advice>
     <aop:config>
-        <aop:pointcut id="pointcut" expression="execution(* me.duelsol.springmvcseed.service.*.*(..)) and !within(me.duelsol.springmvcseed.service.BaseService) and !within(me.duelsol.springmvcseed.service.ServiceFactory)"/>
+        <aop:pointcut id="pointcut" expression="execution(* me.duelsol.springmvcseed.service.*.*(..)) and !within(me.duelsol.springmvcseed.service.BaseService)"/>
         <aop:advisor pointcut-ref="pointcut" advice-ref="txAdvice"/>
     </aop:config>
 

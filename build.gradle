@@ -19,16 +19,17 @@ ext {
 dependencies {
     compile (
             "org.apache.ant:ant-antlr:1.9.7",
-            "com.google.guava:guava:18.0",
             "aopalliance:aopalliance:1.0",
             "org.aspectj:aspectjweaver:1.8.2",
             "taglibs:standard:1.1.2",
             "com.fasterxml.jackson.core:jackson-core:$jackson_version",
             "com.fasterxml.jackson.core:jackson-databind:$jackson_version",
             "net.sf.json-lib:json-lib:2.4:jdk15",
+            "com.google.guava:guava:18.0",
+            "com.google.code.gson:gson:2.8.1",
+            "com.squareup.okhttp3:okhttp:3.8.1",
             "com.rabbitmq:amqp-client:4.1.0",
             "io.jsonwebtoken:jjwt:0.7.0",
-            "com.squareup.okhttp3:okhttp:3.8.1",
 
             "javax.servlet:jstl:1.2",
             "javax.servlet.jsp:jsp-api:2.1",

@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@ include file="common.jsp" %>
+    <%@ include file="project.jsp" %>
     <title>Narrow Jumbotron Template for Bootstrap</title>
 
     <!-- Custom styles for this template -->
@@ -21,7 +21,7 @@
                 type: 'POST',
                 success: function (data) {
                     localStorage.setItem("token", data);
-                    common.debug("token=" + data);
+                    project.debug("token=" + data);
                 }
             });
         }
@@ -34,7 +34,7 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("token")
                 },
                 success: function (data) {
-                    common.debug(data);
+                    project.debug(data);
                     localStorage.clear();
                 }
             });

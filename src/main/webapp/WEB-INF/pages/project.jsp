@@ -33,11 +33,26 @@
     <!-- Bootstrap -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/framework/bootstrap/js/bootstrap.min.js"></script>
 
+    <!-- Juicer -->
+    <script type="text/javascript" src="${pageContext.request.contextPath}/framework/juicer/juicer-min.js"></script>
+    <script type="text/javascript">
+        juicer.set({
+            'tag::operationOpen': '{@',
+            'tag::operationClose': '}',
+            'tag::interpolateOpen': '{{',
+            'tag::interpolateClose': '}}',
+            'tag::noneencodeOpen': '{{{',
+            'tag::noneencodeClose': '}}}',
+            'tag::commentOpen': '{#',
+            'tag::commentClose': '}'
+        });
+    </script>
+
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/project/ie10-viewport-bug-workaround.js"></script>
 
     <!-- common -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/common.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/project/project.js"></script>
 
     <c:set var="commonInclude" value="1" scope="request"/>
 </c:if>

@@ -1,7 +1,7 @@
-var common = {version: "20150102"};
+var project = {version: "20150102"};
 
-common.debug = function (data, level, depth) {
-    var text = common.toString(data, level, depth).replace("\n", "<br>");
+project.debug = function (data, level, depth) {
+    var text = project.toString(data, level, depth).replace("\n", "<br>");
     if ($("#__debugDiv").length == 0) {
         $("body").append("<div style='display:none' id='__debugDiv'></div>");
     }
@@ -16,7 +16,7 @@ common.debug = function (data, level, depth) {
     });
 };
 
-common.toString = function (data, level, depth) {
+project.toString = function (data, level, depth) {
     function _isArray(data) {
         return (data && data.join) ? true : false;
     }

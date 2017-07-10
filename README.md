@@ -14,6 +14,7 @@ Frameworks:
 * [JSTL](http://tomcat.apache.org/taglibs/standard/)
 * [jQuery](http://jquery.com/)
 * [Bootstrap](http://getbootstrap.com/)
+* [Juicer](http://juicer.name)
 
 Before running the project, make sure you have already install [MySQL](https://www.mysql.com/downloads/),
 [Redis](https://redis.io/download) and [RabbitMQ](http://www.rabbitmq.com/download.html) on your computer.

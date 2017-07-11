@@ -21,7 +21,7 @@
                 type: 'POST',
                 success: function (data) {
                     localStorage.setItem("token", data);
-                    project.debug("token=" + data);
+                    alert("token=" + data);
                 }
             });
         }
@@ -34,7 +34,7 @@
                     'Authorization': 'Bearer ' + localStorage.getItem("token")
                 },
                 success: function (data) {
-                    project.debug(data);
+                    alert(data);
                     localStorage.clear();
                 }
             });

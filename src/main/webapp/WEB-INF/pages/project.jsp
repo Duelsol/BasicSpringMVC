@@ -8,7 +8,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<c:if test="${empty requestScope.commonInclude and empty param.commonInclude}">
+<c:if test="${empty requestScope.projectInclude and empty param.projectInclude}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,8 +51,5 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/project/ie10-viewport-bug-workaround.js"></script>
 
-    <!-- common -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/project/project.js"></script>
-
-    <c:set var="commonInclude" value="1" scope="request"/>
+    <c:set var="projectInclude" value="1" scope="request"/>
 </c:if>

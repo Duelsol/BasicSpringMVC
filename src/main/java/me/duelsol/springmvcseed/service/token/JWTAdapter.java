@@ -5,7 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import me.duelsol.springmvcseed.framework.token.TokenManagerDelegate;
 import me.duelsol.springmvcseed.framework.util.PropertiesUtils;
-import me.duelsol.springmvcseed.service.BaseService;
+import me.duelsol.springmvcseed.framework.support.BaseService;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

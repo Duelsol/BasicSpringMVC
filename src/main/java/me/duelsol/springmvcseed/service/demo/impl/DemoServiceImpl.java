@@ -4,7 +4,7 @@ import me.duelsol.springmvcseed.dao.demo.DemoDao;
 import me.duelsol.springmvcseed.entity.demo.DemoEntity;
 import me.duelsol.springmvcseed.framework.messagequeue.MessageQueueConsumer;
 import me.duelsol.springmvcseed.framework.messagequeue.MessageQueueProducer;
-import me.duelsol.springmvcseed.service.BaseService;
+import me.duelsol.springmvcseed.framework.support.BaseService;
 import me.duelsol.springmvcseed.service.demo.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

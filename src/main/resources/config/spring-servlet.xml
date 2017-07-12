@@ -41,6 +41,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
     <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/fonts/**" location="/fonts/"/>
     <mvc:resources mapping="/framework/**" location="/framework/"/>
     <mvc:resources mapping="/images/**" location="/images/"/>
     <mvc:resources mapping="/js/**" location="/js/"/>
@@ -138,12 +139,13 @@
     </bean>
 
     <!-- 异常解析器 -->
-    <bean id="simpleMappingExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <bean id="simpleMappingExceptionResolver" class="me.duelsol.springmvcseed.framework.LoggingExceptionResolver">
         <property name="exceptionMappings">
             <props>
-                <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">common/fileerror</prop>
+                <prop key="java.lang.Exception">error</prop>
             </props>
         </property>
+        <property name="defaultErrorView" value="error"/>
     </bean>
 
     <!-- 事务管理 -->
@@ -156,7 +158,7 @@
         </tx:attributes>
     </tx:advice>
     <aop:config>
-        <aop:pointcut id="pointcut" expression="execution(* me.duelsol.springmvcseed.service.*.*(..)) and !within(me.duelsol.springmvcseed.service.BaseService)"/>
+        <aop:pointcut id="pointcut" expression="execution(* me.duelsol.springmvcseed.service.*.*(..)) and !within(me.duelsol.springmvcseed.framework.support.BaseService)"/>
         <aop:advisor pointcut-ref="pointcut" advice-ref="txAdvice"/>
     </aop:config>
 

@@ -1,6 +1,8 @@
 package me.duelsol.springmvcseed.entity.demo;
 
-import me.duelsol.springmvcseed.entity.BaseEntity;
+import me.duelsol.springmvcseed.framework.support.BaseEntity;
+import me.duelsol.springmvcseed.framework.annotation.Column;
+import me.duelsol.springmvcseed.framework.annotation.Table;
 
 /**
  * Created with IntelliJ IDEA.
@@ -8,15 +10,14 @@ import me.duelsol.springmvcseed.entity.BaseEntity;
  * Date: 14/10/18
  * Time: 18:35
  */
+@Table(name = "springmvc_demo")
 public class DemoEntity extends BaseEntity {
 
+    @Column(name = "amount")
     private int amount = 0;
-    private String detail = "";
 
-    @Override
-    public String getTableName() {
-        return "springmvc_demo";
-    }
+    @Column(name = "detail")
+    private String detail = "";
 
     public int getAmount() {
         return amount;

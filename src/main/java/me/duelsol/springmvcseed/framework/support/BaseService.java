@@ -1,4 +1,4 @@
-package me.duelsol.springmvcseed.service;
+package me.duelsol.springmvcseed.framework.support;
 
 import org.springframework.core.task.TaskExecutor;
 
@@ -10,7 +10,7 @@ import javax.annotation.Resource;
  * Date: 14/10/31
  * Time: 11:35
  */
-public class BaseService {
+public abstract class BaseService {
 
     @Resource(name = "taskExecutor")
     protected TaskExecutor taskExecutor;

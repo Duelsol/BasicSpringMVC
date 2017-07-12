@@ -1,6 +1,9 @@
-package me.duelsol.springmvcseed.entity;
+package me.duelsol.springmvcseed.framework.support;
 
 import me.duelsol.springmvcseed.framework.ApplicationContextHolder;
+import me.duelsol.springmvcseed.framework.annotation.Column;
+import me.duelsol.springmvcseed.framework.annotation.Table;
+import me.duelsol.springmvcseed.framework.exception.UndeclaredTableException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -24,13 +27,11 @@ public abstract class BaseEntity implements Cloneable, Serializable {
     private Date createTime = null;
     private Date updateTime = null;
 
-    public abstract String getTableName();
-
     public final void save() {
         StringBuilder sql = new StringBuilder();
 
         Class clazz = this.getClass();
-        String tableName = this.getTableName();
+        String tableName = this.getTableName(clazz);
         Integer id = this.getId();
         Date currentDate = new Date();
         Field[] fields = clazz.getDeclaredFields();
@@ -43,9 +44,8 @@ public abstract class BaseEntity implements Cloneable, Serializable {
             sql.append("insert into ").append(tableName).append(" (id, create_time, update_time");
             StringBuilder values = new StringBuilder("(null, :createTime, :updateTime");
             for (Field field : fields) {
-                String name = field.getName();
-                sql.append(", ").append(name);
-                values.append(", :").append(name);
+                sql.append(", ").append(this.getColumnName(field));
+                values.append(", :").append(field.getName());
             }
             sql.append(")").append(" values ").append(values.toString()).append(")");
 
@@ -58,8 +58,7 @@ public abstract class BaseEntity implements Cloneable, Serializable {
         } else {
             sql.append("update ").append(tableName).append(" set update_time = :updateTime");
             for (Field field : fields) {
-                String name = field.getName();
-                sql.append(", ").append(name).append(" = :").append(name);
+                sql.append(", ").append(this.getColumnName(field)).append(" = :").append(field.getName());
             }
             sql.append(" where id = ").append(id);
 
@@ -71,11 +70,28 @@ public abstract class BaseEntity implements Cloneable, Serializable {
 
     public final void delete() {
         JdbcTemplate template = ApplicationContextHolder.getInstance().getBean(JdbcTemplate.class);
-        template.update("delete from " + this.getTableName() + " where id = " + this.getId());
+        template.update("delete from " + this.getTableName(this.getClass()) + " where id = " + this.getId());
 
         this.setId(null);
         this.setCreateTime(null);
         this.setUpdateTime(null);
+    }
+
+    private String getTableName(Class clazz) {
+        Table table = (Table) clazz.getAnnotation(Table.class);
+        if (table == null) {
+            throw new UndeclaredTableException(clazz);
+        }
+        return table.name();
+    }
+
+    private String getColumnName(Field field) {
+        String name = field.getName();
+        Column column = field.getAnnotation(Column.class);
+        if (column != null) {
+            name = column.name();
+        }
+        return name;
     }
 
     public final Integer getId() {

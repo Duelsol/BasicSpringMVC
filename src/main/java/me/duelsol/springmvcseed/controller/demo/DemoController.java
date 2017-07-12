@@ -34,7 +34,7 @@ public class DemoController {
         return "index";
 	}
 
-    @RequestMapping(value = "/demo")
+    @RequestMapping(value = "/select")
     @ResponseBody
     @Cacheable(value = "default", key = "new String('allDemos')")
     public Object selectAllDemos() {
@@ -44,6 +44,12 @@ public class DemoController {
             LOGGER.error("获取所有账户时发生错误", e);
         }
         return null;
+    }
+
+    @RequestMapping(value = "/save")
+    @ResponseBody
+    public Object saveDemo() {
+        return demoService.saveDemo(8, "no detail");
     }
 
     @RequestMapping(value = "/mq")

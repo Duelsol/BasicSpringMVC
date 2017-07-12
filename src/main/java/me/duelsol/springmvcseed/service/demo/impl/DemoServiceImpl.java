@@ -38,13 +38,12 @@ public class DemoServiceImpl extends BaseService implements DemoService {
     }
 
     @Override
-    public void saveDemos() {
-        for (int i = 0; i < 10; i++) {
-            DemoEntity entity = new DemoEntity();
-            entity.setAmount(i);
-            entity.setDetail("index:" + i);
-            entity.save();
-        }
+    public DemoEntity saveDemo(int amount, String detail) {
+        DemoEntity entity = new DemoEntity();
+        entity.setAmount(amount);
+        entity.setDetail(detail);
+        entity.save();
+        return entity;
     }
 
     @Override

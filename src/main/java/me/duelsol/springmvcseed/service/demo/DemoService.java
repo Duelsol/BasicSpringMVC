@@ -20,7 +20,7 @@ public interface DemoService {
 
     DemoEntity getDemoById(final int id) throws SQLException;
 
-    void saveDemos();
+    DemoEntity saveDemo(int amount, String detail);
 
     void testMessageQueue() throws IOException, TimeoutException;
 

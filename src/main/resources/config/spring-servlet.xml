@@ -111,12 +111,31 @@
         </property>
     </bean>
 
-    <!-- MySQL -->
-    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+    <!-- 异常解析器 -->
+    <bean id="simpleMappingExceptionResolver" class="me.duelsol.springmvcseed.framework.LoggingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">error</prop>
+            </props>
+        </property>
+        <property name="defaultErrorView" value="error"/>
+    </bean>
+
+    <!-- 数据源 -->
+    <bean id="springmvc" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${mysql.driverClassName}"/>
         <property name="url" value="${mysql.url}"/>
         <property name="username" value="${mysql.username}"/>
         <property name="password" value="${mysql.password}"/>
+    </bean>
+
+    <bean id="dataSource" class="me.duelsol.springmvcseed.framework.DynamicDataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <entry key="springmvc" value-ref="springmvc"/>
+            </map>
+        </property>
+        <property name="defaultTargetDataSource" ref="springmvc"/>
     </bean>
 
     <!-- JDBC -->
@@ -138,16 +157,6 @@
         <constructor-arg index="1" value="BATCH"/>
     </bean>
 
-    <!-- 异常解析器 -->
-    <bean id="simpleMappingExceptionResolver" class="me.duelsol.springmvcseed.framework.LoggingExceptionResolver">
-        <property name="exceptionMappings">
-            <props>
-                <prop key="java.lang.Exception">error</prop>
-            </props>
-        </property>
-        <property name="defaultErrorView" value="error"/>
-    </bean>
-
     <!-- 事务管理 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
@@ -158,7 +167,7 @@
         </tx:attributes>
     </tx:advice>
     <aop:config>
-        <aop:pointcut id="pointcut" expression="execution(* me.duelsol.springmvcseed.service.*.*(..)) and !within(me.duelsol.springmvcseed.framework.support.BaseService)"/>
+        <aop:pointcut id="pointcut" expression="execution(* me.duelsol.springmvcseed.service..*.*(..))"/>
         <aop:advisor pointcut-ref="pointcut" advice-ref="txAdvice"/>
     </aop:config>
 

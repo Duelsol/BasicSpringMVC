@@ -50,6 +50,8 @@
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/project/ie10-viewport-bug-workaround.js"></script>
+    <!-- WebSocket自动重连 -->
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/project/reconnecting-websocket.min.js"></script>
 
     <c:set var="projectInclude" value="1" scope="request"/>
 </c:if>

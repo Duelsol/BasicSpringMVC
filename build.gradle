@@ -66,7 +66,8 @@ dependencies {
             "org.springframework:spring-test:$springframework_version",
             "org.springframework:spring-tx:$springframework_version",
             "org.springframework:spring-web:$springframework_version",
-            "org.springframework:spring-webmvc:$springframework_version"
+            "org.springframework:spring-webmvc:$springframework_version",
+            "org.springframework:spring-websocket:$springframework_version"
     )
     compile fileTree(dir: 'lib', include: '*.jar')
     testCompile group: 'junit', name: 'junit', version: '4.11'

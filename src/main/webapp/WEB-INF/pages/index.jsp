@@ -15,6 +15,23 @@
     <link href="${pageContext.request.contextPath}/css/index/jumbotron-narrow.css" rel="stylesheet">
 
     <script type="text/javascript">
+        var ws = new ReconnectingWebSocket('ws://<%= request.getServerName() %>:<%= request.getServerPort() %>/websocket/demo');
+
+        $(function () {
+            ws.onopen = function () {
+                console.log('onopen')
+            };
+            ws.onmessage = function (message) {
+                console.log(message.data)
+            };
+            ws.onclose = function () {
+                console.log('onclose')
+            };
+            ws.onerror = function () {
+                console.log('onerror')
+            }
+        });
+
         function createJWT() {
             $.ajax({
                 url: '/create_jwt',

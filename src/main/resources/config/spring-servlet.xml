@@ -6,6 +6,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:task="http://www.springframework.org/schema/task"
        xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:redisson="http://redisson.org/schema/redisson"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
         http://www.springframework.org/schema/mvc
@@ -19,7 +20,9 @@
         http://www.springframework.org/schema/task
         http://www.springframework.org/schema/task/spring-task.xsd
         http://www.springframework.org/schema/cache
-        http://www.springframework.org/schema/cache/spring-cache.xsd">
+        http://www.springframework.org/schema/cache/spring-cache.xsd
+        http://redisson.org/schema/redisson
+        http://redisson.org/schema/redisson/redisson.xsd">
 
     <context:component-scan base-package="me.duelsol.springmvcseed"/>
     <context:annotation-config/>
@@ -55,20 +58,20 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath*:config/*.properties</value>
+                <value>classpath*:config/properties/*.properties</value>
             </list>
         </property>
     </bean>
 
     <!-- 线程池 -->
     <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-        <property name="corePoolSize" value="${task.core_pool_size}" />
-        <property name="maxPoolSize" value="${task.max_pool_size}" />
-        <property name="queueCapacity" value="${task.queue_capacity}" />
-        <property name="keepAliveSeconds" value="${task.keep_alive_seconds}" />
+        <property name="corePoolSize" value="${task.core_pool_size}"/>
+        <property name="maxPoolSize" value="${task.max_pool_size}"/>
+        <property name="queueCapacity" value="${task.queue_capacity}"/>
+        <property name="keepAliveSeconds" value="${task.keep_alive_seconds}"/>
     </bean>
 
-    <!-- Redis -->
+    <!-- Jedis -->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxIdle" value="${redis.maxIdle}"/>
         <property name="maxTotal" value="${redis.maxTotal}"/>
@@ -97,6 +100,11 @@
             <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
         </property>
     </bean>
+
+    <!-- Redisson -->
+    <redisson:client id="redissonClient">
+        <redisson:single-server address="redis://${redis.host}:${redis.port}"/>
+    </redisson:client>
 
     <!-- 缓存 -->
     <cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true"/>

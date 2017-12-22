@@ -52,6 +52,7 @@ dependencies {
 
             "mysql:mysql-connector-java:5.1.37",
             "redis.clients:jedis:2.9.0",
+            "org.redisson:redisson:3.5.6",
             "org.springframework.data:spring-data-redis:1.8.3.RELEASE",
             "org.mybatis:mybatis:3.2.8",
             "org.mybatis:mybatis-spring:1.2.2",
@@ -60,9 +61,9 @@ dependencies {
             "org.springframework:spring-beans:$springframework_version",
             "org.springframework:spring-context:$springframework_version",
             "org.springframework:spring-core:$springframework_version",
+            "org.springframework:spring-expression:$springframework_version",
             "org.springframework:spring-jdbc:$springframework_version",
             "org.springframework:spring-orm:$springframework_version",
-            "org.springframework:spring-expression:$springframework_version",
             "org.springframework:spring-test:$springframework_version",
             "org.springframework:spring-tx:$springframework_version",
             "org.springframework:spring-web:$springframework_version",

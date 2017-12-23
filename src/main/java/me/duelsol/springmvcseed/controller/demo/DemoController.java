@@ -1,7 +1,5 @@
 package me.duelsol.springmvcseed.controller.demo;
 
-import me.duelsol.springmvcseed.framework.token.annotation.DuplicateSubmissionsChecker;
-import me.duelsol.springmvcseed.framework.token.annotation.DuplicateSubmissionsSource;
 import me.duelsol.springmvcseed.framework.token.annotation.Token;
 import me.duelsol.springmvcseed.framework.token.annotation.TokenBehaviour;
 import me.duelsol.springmvcseed.service.websocket.DemoWebSocketHandler;
@@ -70,14 +68,12 @@ public class DemoController {
     @PostMapping(value = "create_jwt")
     @ResponseBody
     @Token(behaviour = TokenBehaviour.CREATE)
-    @DuplicateSubmissionsSource(key = "INDEX")
     public void createJWT() {
     }
 
     @PostMapping(value = "validate_jwt")
     @ResponseBody
     @Token
-    @DuplicateSubmissionsChecker(key = "INDEX")
     public String validateJWT() {
 	    return "JWT validate passed.";
     }

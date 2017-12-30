@@ -50,6 +50,7 @@ dependencies {
             "commons-beanutils:commons-beanutils:1.9.2",
             "commons-logging:commons-logging:1.2",
 
+            "com.alibaba:druid:1.1.6",
             "mysql:mysql-connector-java:5.1.37",
             "redis.clients:jedis:2.9.0",
             "org.redisson:redisson:3.5.6",

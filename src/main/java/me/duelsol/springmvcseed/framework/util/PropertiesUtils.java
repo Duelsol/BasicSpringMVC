@@ -27,7 +27,7 @@ public class PropertiesUtils {
 
     static {
         try {
-            Resource resource = new ClassPathResource("config/properties");
+            Resource resource = new ClassPathResource("config");
             Collection files = FileUtils.listFiles(resource.getFile(), new String[]{"properties"}, true);
             for (Object file : files) {
                 if (file != null && file instanceof File) {

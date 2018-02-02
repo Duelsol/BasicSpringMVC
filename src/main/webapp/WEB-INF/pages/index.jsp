@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@ include file="project.jsp" %>
+    <%@ include file="header.jsp" %>
     <title>Narrow Jumbotron Template for Bootstrap</title>
 
     <!-- Custom styles for this template -->

@@ -45,7 +45,7 @@
     </mvc:annotation-driven>
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/fonts/**" location="/fonts/"/>
-    <mvc:resources mapping="/framework/**" location="/framework/"/>
+    <mvc:resources mapping="/lib/**" location="/lib/"/>
     <mvc:resources mapping="/images/**" location="/images/"/>
     <mvc:resources mapping="/js/**" location="/js/"/>
 

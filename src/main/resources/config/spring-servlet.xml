@@ -36,22 +36,6 @@
         <bean class="me.duelsol.springmvcseed.framework.token.TokenInterceptor"/>
     </mvc:interceptors>
 
-    <!-- 转换器 -->
-    <mvc:annotation-driven>
-        <mvc:message-converters>
-            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                <property name="objectMapper">
-                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
-                        <property name="serializationInclusion">
-                            <value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
-                        </property>
-                    </bean>
-                </property>
-            </bean>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
-
     <!-- 静态资源 -->
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/fonts/**" location="/fonts/"/>
@@ -116,29 +100,6 @@
         <redisson:single-server address="redis://${redis.host}:${redis.port}"/>
     </redisson:client>
 
-    <!-- 缓存 -->
-    <cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true"/>
-
-    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
-        <property name="caches">
-            <set>
-                <bean class="me.duelsol.springmvcseed.framework.cache.RedisCacheImpl">
-                    <property name="name" value="default"/>
-                </bean>
-            </set>
-        </property>
-    </bean>
-
-    <!-- 异常解析器 -->
-    <bean id="simpleMappingExceptionResolver" class="me.duelsol.springmvcseed.framework.LoggingExceptionResolver">
-        <property name="exceptionMappings">
-            <props>
-                <prop key="java.lang.Exception">error</prop>
-            </props>
-        </property>
-        <property name="defaultErrorView" value="error"/>
-    </bean>
-
     <!-- 数据源 -->
     <bean id="springmvc" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
@@ -200,6 +161,45 @@
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
         <constructor-arg index="1" value="BATCH"/>
+    </bean>
+
+    <!-- 缓存 -->
+    <cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true"/>
+
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <bean class="me.duelsol.springmvcseed.framework.cache.RedisCacheImpl">
+                    <property name="name" value="default"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
+
+    <!-- 转换器 -->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <property name="serializationInclusion">
+                            <value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!-- 异常解析器 -->
+    <bean id="simpleMappingExceptionResolver" class="me.duelsol.springmvcseed.framework.LoggingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">error</prop>
+            </props>
+        </property>
+        <property name="defaultErrorView" value="error"/>
     </bean>
 
     <!-- 事务管理 -->

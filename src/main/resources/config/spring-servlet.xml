@@ -36,13 +36,23 @@
         <bean class="me.duelsol.springmvcseed.framework.token.TokenInterceptor"/>
     </mvc:interceptors>
 
-    <!-- 静态资源 -->
+    <!-- 转换器 -->
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <property name="serializationInclusion">
+                            <value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+    <!-- 静态资源 -->
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/fonts/**" location="/fonts/"/>
     <mvc:resources mapping="/lib/**" location="/lib/"/>

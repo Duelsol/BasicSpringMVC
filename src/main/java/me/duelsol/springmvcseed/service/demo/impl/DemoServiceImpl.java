@@ -1,18 +1,18 @@
 package me.duelsol.springmvcseed.service.demo.impl;
 
-import me.duelsol.springmvcseed.dao.demo.DemoDao;
-import me.duelsol.springmvcseed.entity.demo.DemoEntity;
+import me.duelsol.springmvcseed.dao.DemoMapper;
+import me.duelsol.springmvcseed.model.Demo;
 import me.duelsol.springmvcseed.framework.messagequeue.MessageQueueConsumer;
 import me.duelsol.springmvcseed.framework.messagequeue.MessageQueueProducer;
-import me.duelsol.springmvcseed.framework.support.BaseService;
+import me.duelsol.springmvcseed.model.DemoExample;
+import me.duelsol.springmvcseed.service.BaseService;
 import me.duelsol.springmvcseed.service.demo.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -25,25 +25,27 @@ import java.util.concurrent.TimeoutException;
 public class DemoServiceImpl extends BaseService implements DemoService {
 
     @Autowired
-    private DemoDao demoDao;
+    private DemoMapper demoMapper;
 
     @Override
-    public List<Map> selectAllDemos() throws SQLException {
-        return demoDao.selectAllDemos();
+    public List<Demo> selectAllDemos() {
+        return demoMapper.selectByExample(new DemoExample());
     }
 
     @Override
-    public DemoEntity getDemoById(final int id) throws SQLException {
-        return demoDao.getDemoByID(id);
+    public Demo getDemoById(final int id) {
+        return demoMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public DemoEntity saveDemo(int amount, String detail) {
-        DemoEntity entity = new DemoEntity();
-        entity.setAmount(amount);
-        entity.setDetail(detail);
-        entity.save();
-        return entity;
+    public Demo saveDemo(int amount, String detail) {
+        Demo demo = new Demo();
+        demo.setAmount(amount);
+        demo.setDetail(detail);
+        demo.setCreateTime(new Date());
+        demo.setUpdateTime(new Date());
+        demoMapper.insert(demo);
+        return demo;
     }
 
     @Override

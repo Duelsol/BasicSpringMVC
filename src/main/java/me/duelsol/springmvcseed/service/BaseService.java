@@ -1,4 +1,4 @@
-package me.duelsol.springmvcseed.framework.support;
+package me.duelsol.springmvcseed.service;
 
 import org.springframework.core.task.TaskExecutor;
 

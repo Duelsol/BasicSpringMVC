@@ -5,7 +5,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import me.duelsol.springmvcseed.framework.token.TokenManagerDelegate;
 import me.duelsol.springmvcseed.framework.util.PropertiesUtils;
-import me.duelsol.springmvcseed.framework.support.BaseService;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -24,7 +23,7 @@ import java.io.OutputStream;
  * Time: 14:16
  */
 @Service
-public class JWTAdapter extends BaseService implements TokenManagerDelegate {
+public class JWTAdapter implements TokenManagerDelegate {
 
     private static String base64EncodedKey = null;
 

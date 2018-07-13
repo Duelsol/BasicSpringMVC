@@ -1,11 +1,9 @@
 package me.duelsol.springmvcseed.service.demo;
 
-import me.duelsol.springmvcseed.entity.demo.DemoEntity;
+import me.duelsol.springmvcseed.model.Demo;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -16,11 +14,11 @@ import java.util.concurrent.TimeoutException;
  */
 public interface DemoService {
 
-    List<Map> selectAllDemos() throws SQLException;
+    List<Demo> selectAllDemos();
 
-    DemoEntity getDemoById(final int id) throws SQLException;
+    Demo getDemoById(final int id);
 
-    DemoEntity saveDemo(int amount, String detail);
+    Demo saveDemo(int amount, String detail);
 
     void testMessageQueue() throws IOException, TimeoutException;
 

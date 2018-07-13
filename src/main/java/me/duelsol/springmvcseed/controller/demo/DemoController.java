@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.socket.TextMessage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.concurrent.TimeoutException;
 
 @Controller
@@ -41,12 +40,7 @@ public class DemoController {
     @ResponseBody
     @Cacheable(value = "default", key = "new String('allDemos')")
     public Object selectAllDemos() {
-        try {
-            return demoService.selectAllDemos();
-        } catch (SQLException e) {
-            LOGGER.error("获取所有账户时发生错误", e);
-        }
-        return null;
+        return demoService.selectAllDemos();
     }
 
     @RequestMapping(value = "save")

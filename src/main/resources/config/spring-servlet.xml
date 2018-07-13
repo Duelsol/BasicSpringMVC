@@ -144,23 +144,14 @@
         <property name="defaultTargetDataSource" ref="springmvc"/>
     </bean>
 
-    <!-- JDBC -->
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <constructor-arg ref="dataSource"/>
-    </bean>
-    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-        <constructor-arg ref="dataSource"/>
-    </bean>
-
     <!-- MyBatis -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath*:mapper/*"/>
-        <property name="typeAliasesPackage" value="me.duelsol.springmvcseed.entity"/>
+        <property name="typeAliasesPackage" value="me.duelsol.springmvcseed.model"/>
     </bean>
-    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory"/>
-        <constructor-arg index="1" value="BATCH"/>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="me.duelsol.springmvcseed.dao"/>
     </bean>
 
     <!-- 缓存 -->

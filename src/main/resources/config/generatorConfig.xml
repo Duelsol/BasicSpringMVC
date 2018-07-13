@@ -12,8 +12,26 @@
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
+        <!-- Model实现Serializable接口 -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!-- Model增加toString方法 -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!-- Example增加非大小写敏感查询方法 -->
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+        <!-- MySQL分页插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.LimitPlugin"/>
+        <!-- 批量插入插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin"/>
+        <!-- 逻辑删除插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.LogicalDeletePlugin">
+            <!-- 这里配置的是全局逻辑删除列和逻辑删除值，当然在table中配置的值会覆盖该全局配置 -->
+            <!-- 逻辑删除列类型只能为数字、字符串或者布尔类型 -->
+            <property name="logicalDeleteColumn" value="delete_flag"/>
+            <!-- 逻辑删除-已删除值 -->
+            <property name="logicalDeleteValue" value="1"/>
+            <!-- 逻辑删除-未删除值 -->
+            <property name="logicalUnDeleteValue" value="0"/>
+        </plugin>
 
         <!-- 对注释进行控制 -->
         <commentGenerator>
@@ -92,10 +110,11 @@
             domainObjectName 给表对应的 model 起名字
             注意：大小写敏感问题。
          -->
-        <table tableName="springmvc_demo" domainObjectName="Demo" delimitAllColumns="true"
+        <table tableName="springmvc%" delimitAllColumns="true"
                enableCountByExample="false" enableDeleteByExample="false"
                enableSelectByExample="true" enableUpdateByExample="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <domainObjectRenamingRule searchString="^Springmvc" replaceString=""/>
             <!-- 用来修改表中某个列的属性,一个table元素中可以有多个columnOverride元素.
                 property属性来指定列要生成的属性名称.
              -->

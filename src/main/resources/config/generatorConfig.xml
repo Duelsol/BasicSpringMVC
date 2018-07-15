@@ -16,6 +16,8 @@
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <!-- Model增加toString方法 -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!-- Model增加equals方法和hashCode方法 -->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
         <!-- Example增加非大小写敏感查询方法 -->
         <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
         <!-- MySQL分页插件 -->

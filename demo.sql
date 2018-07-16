@@ -2,7 +2,7 @@ CREATE TABLE `springmvc_demo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `create_time` datetime NOT NULL,
   `update_time` datetime NOT NULL,
-  `delete_flag` int(11) NOT NULL,
+  `delete_flag` int(11) DEFAULT '0',
   `amount` int(11) DEFAULT NULL,
   `detail` varchar(45) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`id`)

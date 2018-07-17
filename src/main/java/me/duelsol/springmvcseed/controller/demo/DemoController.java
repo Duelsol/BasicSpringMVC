@@ -36,7 +36,7 @@ public class DemoController {
         return "index";
 	}
 
-    @RequestMapping(value = "select")
+    @RequestMapping(value = "list")
     @ResponseBody
     @Cacheable(value = "default", key = "new String('allDemos')")
     public Object selectAllDemos() {

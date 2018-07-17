@@ -24,6 +24,8 @@
         <plugin type="com.itfsw.mybatis.generator.plugins.LimitPlugin"/>
         <!-- 批量插入插件 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin"/>
+        <!-- 数据Model属性对应Column获取插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin"/>
         <!-- 逻辑删除插件 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.LogicalDeletePlugin">
             <!-- 这里配置的是全局逻辑删除列和逻辑删除值，当然在table中配置的值会覆盖该全局配置 -->

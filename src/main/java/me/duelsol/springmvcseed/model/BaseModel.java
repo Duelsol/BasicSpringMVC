@@ -9,7 +9,7 @@ import java.util.Date;
  * Date: 2018/7/16
  * Time: 22:27
  */
-public class BaseModel implements Serializable {
+public class BaseModel implements Cloneable, Serializable {
 
     /**
      * 自增主键

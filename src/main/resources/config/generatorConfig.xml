@@ -12,8 +12,6 @@
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
-        <!-- Model实现Serializable接口 -->
-        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <!-- Model增加toString方法 -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
         <!-- Model增加equals方法和hashCode方法 -->
@@ -47,10 +45,10 @@
 
         <!-- JDBC的数据库连接 -->
         <jdbcConnection
-                driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://127.0.0.1:3306/springmvc"
-                userId="root"
-                password="root">
+                driverClass="${mysql.driverClass}"
+                connectionURL="${mysql.url}"
+                userId="${mysql.username}"
+                password="${mysql.password}">
         </jdbcConnection>
 
         <!-- Java类型处理器
@@ -75,10 +73,16 @@
             targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录
          -->
         <javaModelGenerator targetPackage="me.duelsol.springmvcseed.model" targetProject="src/main/java">
+            <!-- 设置一个根对象，
+                如果设置了这个根对象，那么生成的keyClass或者recordClass会继承这个类；在Table的rootClass属性中可以覆盖该选项
+                注意：如果在key class或者record class中有root class相同的属性，MBG就不会重新生成这些属性了，包括：
+                1，属性名相同，类型相同，有相同的getter/setter方法；
+            -->
+            <property name="rootClass" value="me.duelsol.springmvcseed.model.BaseModel"/>
             <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
             <property name="enableSubPackages" value="true"/>
             <!-- 是否对model添加 构造函数 -->
-            <property name="constructorBased" value="true"/>
+            <property name="constructorBased" value="false"/>
             <!-- 是否对类CHAR类型的列的数据进行trim操作 -->
             <property name="trimStrings" value="true"/>
             <!-- 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->

@@ -8,6 +8,7 @@ import me.duelsol.springmvcseed.service.demo.DemoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -38,15 +39,17 @@ public class DemoController {
 
     @RequestMapping(value = "list")
     @ResponseBody
-    @Cacheable(value = "default", key = "new String('allDemos')")
+    @Cacheable(value = "default", key = "'allDemos'")
     public Object selectAllDemos() {
         return demoService.selectAllDemos();
     }
 
     @RequestMapping(value = "save")
     @ResponseBody
+    @CachePut(value = "default", key = "'allDemos'")
     public Object saveDemo() {
-        return demoService.saveDemo(8, "no detail");
+        demoService.saveDemo(8, "no detail");
+        return demoService.selectAllDemos();
     }
 
     @RequestMapping(value = "mq")

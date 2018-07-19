@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
@@ -42,8 +41,6 @@ public class DemoServiceImpl extends BaseService implements DemoService {
         Demo demo = new Demo();
         demo.setAmount(amount);
         demo.setDetail(detail);
-        demo.setCreateTime(new Date());
-        demo.setUpdateTime(new Date());
         demoMapper.insert(demo);
         return demo;
     }

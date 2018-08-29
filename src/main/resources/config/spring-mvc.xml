@@ -7,6 +7,7 @@
        xmlns:task="http://www.springframework.org/schema/task"
        xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns:redisson="http://redisson.org/schema/redisson"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
         http://www.springframework.org/schema/mvc
@@ -21,6 +22,8 @@
         http://www.springframework.org/schema/task/spring-task.xsd
         http://www.springframework.org/schema/cache
         http://www.springframework.org/schema/cache/spring-cache.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd
         http://redisson.org/schema/redisson
         http://redisson.org/schema/redisson/redisson.xsd">
 
@@ -30,11 +33,6 @@
 
     <!-- 定时任务 -->
     <task:annotation-driven/>
-
-    <!-- 拦截器配置 -->
-    <mvc:interceptors>
-        <bean class="me.duelsol.springmvcseed.framework.token.TokenInterceptor"/>
-    </mvc:interceptors>
 
     <!-- 静态资源 -->
     <mvc:resources mapping="/css/**" location="/css/"/>
@@ -206,5 +204,36 @@
         <aop:pointcut id="pointcut" expression="execution(* me.duelsol.springmvcseed.service..*.*(..))"/>
         <aop:advisor pointcut-ref="pointcut" advice-ref="txAdvice"/>
     </aop:config>
+
+    <!-- Shiro -->
+    <bean id="authorityRealm" class="me.duelsol.springmvcseed.framework.security.AuthorityRealm"/>
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="authorityRealm"/>
+    </bean>
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true"/>
+    </bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+    <bean id="accessTokenAuthenticationFilter" class="me.duelsol.springmvcseed.framework.security.AccessTokenAuthenticationFilter"/>
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/index"/>
+        <property name="successUrl" value="/index"/>
+        <property name="unauthorizedUrl" value="/403"/>
+        <property name="filters">
+            <util:map>
+                <entry key="authc" value-ref="accessTokenAuthenticationFilter"/>
+            </util:map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                /logout = authc
+                /** = anon
+            </value>
+        </property>
+    </bean>
 
 </beans>

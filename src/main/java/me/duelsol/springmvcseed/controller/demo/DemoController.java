@@ -1,10 +1,12 @@
 package me.duelsol.springmvcseed.controller.demo;
 
-import me.duelsol.springmvcseed.framework.token.annotation.Token;
-import me.duelsol.springmvcseed.framework.token.annotation.TokenBehaviour;
+import me.duelsol.springmvcseed.framework.security.AccessTokenManager;
 import me.duelsol.springmvcseed.service.websocket.DemoWebSocketHandler;
 import me.duelsol.springmvcseed.framework.websocket.WebSocketCenter;
 import me.duelsol.springmvcseed.service.demo.DemoService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,29 +34,46 @@ public class DemoController {
     private static final Logger LOGGER = LoggerFactory.getLogger(DemoController.class);
 
 	@RequestMapping(value = "index")
-	public String printWelcome(ModelMap model) {
+	public String index(ModelMap model) {
         model.addAttribute("message", "Hello world!");
         return "index";
 	}
 
+    @PostMapping(value = "login")
+    @ResponseBody
+    public String login() {
+        UsernamePasswordToken token = new UsernamePasswordToken("admin", "123456");
+        Subject subject = SecurityUtils.getSubject();
+        subject.login(token);
+        return AccessTokenManager.generate();
+    }
+
+    @PostMapping(value = "logout")
+    @ResponseBody
+    public String logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return "Logout successful.";
+    }
+
     @RequestMapping(value = "list")
     @ResponseBody
     @Cacheable(value = "default", key = "'allDemos'")
-    public Object selectAllDemos() {
+    public Object list() {
         return demoService.selectAllDemos();
     }
 
     @RequestMapping(value = "save")
     @ResponseBody
     @CachePut(value = "default", key = "'allDemos'")
-    public Object saveDemo() {
+    public Object save() {
         demoService.saveDemo(8, "no detail");
         return demoService.selectAllDemos();
     }
 
     @RequestMapping(value = "mq")
     @ResponseBody
-    public void testMessageQueue() {
+    public void mq() {
         try {
             demoService.testMessageQueue();
         } catch (IOException | TimeoutException e) {
@@ -62,22 +81,9 @@ public class DemoController {
         }
     }
 
-    @PostMapping(value = "create_jwt")
-    @ResponseBody
-    @Token(behaviour = TokenBehaviour.CREATE)
-    public void createJWT() {
-    }
-
-    @PostMapping(value = "validate_jwt")
-    @ResponseBody
-    @Token
-    public String validateJWT() {
-	    return "JWT validate passed.";
-    }
-
     @RequestMapping(value = "websocket")
     @ResponseBody
-    public void testWebSocket() {
+    public void websocket() {
         WebSocketCenter.sendMessage(demoWebSocketHandler, new TextMessage("testWebSocket"));
     }
 

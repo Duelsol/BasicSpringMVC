@@ -32,23 +32,23 @@
             }
         });
 
-        function createJWT() {
+        function login() {
             $.ajax({
-                url: '/create_jwt',
+                url: '/login',
                 type: 'POST',
                 success: function (data) {
-                    localStorage.setItem("token", data);
-                    alert("token=" + data);
+                    localStorage.setItem("access_token", data);
+                    alert("access_token=" + data);
                 }
             });
         }
 
-        function validateJWT() {
+        function logout() {
             $.ajax({
-                url: '/validate_jwt',
+                url: '/logout',
                 type: 'POST',
                 headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem("token")
+                    'Authorization': 'Bearer ' + localStorage.getItem("access_token")
                 },
                 success: function (data) {
                     alert(data);
@@ -73,8 +73,8 @@
             <h1>Jumbotron heading</h1>
             <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
             <p>
-                <a class="btn btn-lg btn-success" href="javascript:void(0)" role="button" onclick="createJWT()">Create JWT</a>
-                <a class="btn btn-lg btn-success" href="javascript:void(0)" role="button" onclick="validateJWT()">Validate JWT</a>
+                <a class="btn btn-lg btn-success" href="javascript:void(0)" role="button" onclick="login()">Login</a>
+                <a class="btn btn-lg btn-success" href="javascript:void(0)" role="button" onclick="logout()">Logout</a>
             </p>
         </div>
 

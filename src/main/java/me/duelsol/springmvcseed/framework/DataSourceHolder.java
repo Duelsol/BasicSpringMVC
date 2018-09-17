@@ -8,14 +8,20 @@ package me.duelsol.springmvcseed.framework;
  */
 public class DataSourceHolder {
 
-    private static final ThreadLocal<String> DATASOURCE = new ThreadLocal<>();
+    private static final ThreadLocal<String> DATA_SOURCE = new ThreadLocal<>();
+
+    private DataSourceHolder() {}
 
     public static void setDataSource(String customerType) {
-        DATASOURCE.set(customerType);
+        DATA_SOURCE.set(customerType);
     }
 
     public static String getDataSource() {
-        return DATASOURCE.get();
+        return DATA_SOURCE.get();
+    }
+
+    public static void clear() {
+        DATA_SOURCE.remove();
     }
 
 }

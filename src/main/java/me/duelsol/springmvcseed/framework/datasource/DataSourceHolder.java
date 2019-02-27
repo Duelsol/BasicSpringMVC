@@ -1,4 +1,4 @@
-package me.duelsol.springmvcseed.framework;
+package me.duelsol.springmvcseed.framework.datasource;
 
 /**
  * Created by IntelliJ IDEA.

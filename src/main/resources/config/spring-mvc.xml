@@ -133,7 +133,7 @@
         <property name="useGlobalDataSourceStat" value="true"/>
     </bean>
 
-    <bean id="dataSource" class="me.duelsol.springmvcseed.framework.DynamicDataSource">
+    <bean id="dataSource" class="me.duelsol.springmvcseed.framework.datasource.DynamicDataSource">
         <property name="targetDataSources">
             <map key-type="java.lang.String">
                 <entry key="springmvc" value-ref="springmvc"/>

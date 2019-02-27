@@ -8,7 +8,7 @@
     <display-name>Widget</display-name>
     <tlib-version>1.0</tlib-version>
     <short-name>widget</short-name>
-    <uri>http://duelsol.me/springmvc-seed/widget</uri>
+    <uri>http://duelsol.me/spring-mvc-seed/widget</uri>
 
     <!--<tag>-->
         <!--<name></name>-->

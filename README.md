@@ -1,4 +1,4 @@
-# springmvc-seed
+# spring-mvc-seed
 
 A token-based application skeleton for a SpringMVC project. 
 

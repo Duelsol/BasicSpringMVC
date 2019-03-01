@@ -99,7 +99,7 @@
     </redisson:client>
 
     <!-- 数据源 -->
-    <bean id="springmvc" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+    <bean id="mainDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
         <property name="url" value="${mysql.url}"/>
         <property name="username" value="${mysql.username}"/>
@@ -136,10 +136,10 @@
     <bean id="dataSource" class="me.duelsol.springmvcseed.framework.datasource.DynamicDataSource">
         <property name="targetDataSources">
             <map key-type="java.lang.String">
-                <entry key="springmvc" value-ref="springmvc"/>
+                <entry key="main" value-ref="mainDataSource"/>
             </map>
         </property>
-        <property name="defaultTargetDataSource" ref="springmvc"/>
+        <property name="defaultTargetDataSource" ref="mainDataSource"/>
     </bean>
 
     <!-- MyBatis -->

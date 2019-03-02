@@ -1,6 +1,7 @@
 package me.duelsol.springmvcseed.controller.demo;
 
 import me.duelsol.springmvcseed.framework.security.AccessTokenManager;
+import me.duelsol.springmvcseed.framework.support.ResponseData;
 import me.duelsol.springmvcseed.service.websocket.DemoWebSocketHandler;
 import me.duelsol.springmvcseed.framework.websocket.WebSocketCenter;
 import me.duelsol.springmvcseed.service.demo.DemoService;
@@ -41,34 +42,34 @@ public class DemoController {
 
     @PostMapping(value = "login")
     @ResponseBody
-    public String login() {
+    public ResponseData login() {
         UsernamePasswordToken token = new UsernamePasswordToken("admin", "123456");
         Subject subject = SecurityUtils.getSubject();
         subject.login(token);
-        return AccessTokenManager.generate();
+        return new ResponseData(AccessTokenManager.generate());
     }
 
     @PostMapping(value = "logout")
     @ResponseBody
-    public String logout() {
+    public ResponseData logout() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        return "Logout successful.";
+        return new ResponseData("Logout successful.");
     }
 
     @RequestMapping(value = "list")
     @ResponseBody
     @Cacheable(value = "default", key = "'allDemos'")
-    public Object list() {
-        return demoService.selectAllDemos();
+    public ResponseData list() {
+        return new ResponseData(demoService.selectAllDemos());
     }
 
     @RequestMapping(value = "save")
     @ResponseBody
     @CachePut(value = "default", key = "'allDemos'")
-    public Object save() {
+    public ResponseData save() {
         demoService.saveDemo(8, "no detail");
-        return demoService.selectAllDemos();
+        return new ResponseData(demoService.selectAllDemos());
     }
 
     @RequestMapping(value = "mq")

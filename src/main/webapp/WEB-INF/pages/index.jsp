@@ -36,9 +36,9 @@
             $.ajax({
                 url: '/login',
                 type: 'POST',
-                success: function (data) {
-                    localStorage.setItem("access_token", data);
-                    alert("access_token=" + data);
+                success: function (res) {
+                    localStorage.setItem("access_token", res.data);
+                    alert("access_token=" + res.data);
                 }
             });
         }
@@ -50,8 +50,8 @@
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("access_token")
                 },
-                success: function (data) {
-                    alert(data);
+                success: function (res) {
+                    alert(res.data);
                     localStorage.clear();
                 }
             });

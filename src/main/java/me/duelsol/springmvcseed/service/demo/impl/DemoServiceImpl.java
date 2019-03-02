@@ -37,7 +37,7 @@ public class DemoServiceImpl extends BaseService implements DemoService {
     }
 
     @Override
-    public Demo saveDemo(int amount, String detail) {
+    public Demo createDemo(int amount, String detail) {
         Demo demo = new Demo();
         demo.setAmount(amount);
         demo.setDetail(detail);

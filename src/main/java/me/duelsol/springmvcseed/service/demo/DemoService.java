@@ -18,7 +18,7 @@ public interface DemoService {
 
     Demo getDemoById(final int id);
 
-    Demo saveDemo(int amount, String detail);
+    Demo createDemo(int amount, String detail);
 
     void testMessageQueue() throws IOException, TimeoutException;
 

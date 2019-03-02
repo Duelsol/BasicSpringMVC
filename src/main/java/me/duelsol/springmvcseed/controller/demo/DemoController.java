@@ -64,11 +64,11 @@ public class DemoController {
         return new ResponseData(demoService.selectAllDemos());
     }
 
-    @RequestMapping(value = "save")
+    @RequestMapping(value = "create")
     @ResponseBody
     @CachePut(value = "default", key = "'allDemos'")
-    public ResponseData save() {
-        demoService.saveDemo(8, "no detail");
+    public ResponseData create() {
+        demoService.createDemo(8, "no detail");
         return new ResponseData(demoService.selectAllDemos());
     }
 

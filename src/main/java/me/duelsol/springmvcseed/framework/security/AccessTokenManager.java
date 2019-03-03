@@ -3,11 +3,12 @@ package me.duelsol.springmvcseed.framework.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import me.duelsol.springmvcseed.framework.util.PropertiesUtils;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,21 +18,18 @@ import javax.servlet.http.HttpServletRequest;
  * Date: 2017/5/16
  * Time: 14:16
  */
+@Component
 public class AccessTokenManager {
 
-    private static String base64EncodedKey = null;
+    private static String subject;
+
+    private static String base64EncodedKey;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccessTokenManager.class);
-
-    static {
-        String rowKey = PropertiesUtils.getProperty("jwt.key");
-        base64EncodedKey = Base64.encodeBase64String(rowKey.getBytes());
-    }
 
     private AccessTokenManager() {}
 
     public static String generate() {
-        String subject = PropertiesUtils.getProperty("jwt.subject");
         return Jwts.builder().setSubject(subject).signWith(SignatureAlgorithm.HS256, base64EncodedKey).compact();
     }
 
@@ -39,7 +37,6 @@ public class AccessTokenManager {
         try {
             Claims claims = Jwts.parser().setSigningKey(base64EncodedKey).parseClaimsJws(token).getBody();
             if (claims != null) {
-                String subject = PropertiesUtils.getProperty("jwt.subject");
                 if (claims.getSubject().equals(subject)) {
                     return true;
                 }
@@ -56,6 +53,16 @@ public class AccessTokenManager {
             return authorization.substring("Bearer ".length());
         }
         return null;
+    }
+
+    @Value("${jwt.subject}")
+    private void setSubject(String subject) {
+        AccessTokenManager.subject = subject;
+    }
+
+    @Value("${jwt.key}")
+    private void setKey(String key) {
+        AccessTokenManager.base64EncodedKey = Base64.encodeBase64String(key.getBytes());
     }
 
 }

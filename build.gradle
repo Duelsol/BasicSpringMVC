@@ -31,7 +31,6 @@ dependencies {
             "com.google.guava:guava:18.0",
             "com.google.code.gson:gson:2.8.1",
             "com.squareup.okhttp3:okhttp:3.8.1",
-            "com.rabbitmq:amqp-client:4.1.0",
             "io.jsonwebtoken:jjwt:0.7.0",
             "org.apache.shiro:shiro-spring:1.4.0",
 

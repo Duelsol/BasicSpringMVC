@@ -1,6 +1,5 @@
 package me.duelsol.springmvcseed.framework.util;
 
-import com.sun.istack.internal.NotNull;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,17 +20,17 @@ import java.util.Properties;
  */
 public class PropertiesUtils {
 
-    private static final Properties properties = new Properties();
+    private static final Properties PROPERTIES = new Properties();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertiesUtils.class);
 
     static {
         try {
             Resource resource = new ClassPathResource("config");
-            Collection files = FileUtils.listFiles(resource.getFile(), new String[]{"properties"}, true);
+            Collection<File> files = FileUtils.listFiles(resource.getFile(), new String[]{"properties"}, true);
             for (Object file : files) {
-                if (file != null && file instanceof File) {
-                    properties.load(new FileInputStream((File) file));
+                if (file instanceof File) {
+                    PROPERTIES.load(new FileInputStream((File) file));
                 }
             }
         } catch (IOException e) {
@@ -41,12 +40,18 @@ public class PropertiesUtils {
 
     private PropertiesUtils() {}
 
-    public static String getProperty(@NotNull String key) {
-        return properties.getProperty(key);
+    public static String getProperty(String key) {
+        if (key == null) {
+            return null;
+        }
+        return PROPERTIES.getProperty(key);
     }
 
     public static String getProperty(String key, String defaultValue) {
-        return properties.getProperty(key, defaultValue);
+        if (key == null) {
+            return defaultValue;
+        }
+        return PROPERTIES.getProperty(key, defaultValue);
     }
 
 }

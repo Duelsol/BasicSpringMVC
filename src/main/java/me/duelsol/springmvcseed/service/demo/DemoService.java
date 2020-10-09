@@ -20,6 +20,4 @@ public interface DemoService {
 
     Demo createDemo(int amount, String detail);
 
-    void testMessageQueue() throws IOException, TimeoutException;
-
 }

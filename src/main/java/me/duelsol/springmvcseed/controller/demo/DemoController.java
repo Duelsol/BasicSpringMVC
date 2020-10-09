@@ -20,9 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.socket.TextMessage;
 
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
-
 @Controller
 @RequestMapping("/")
 public class DemoController {
@@ -70,16 +67,6 @@ public class DemoController {
     public ResponseData create() {
         demoService.createDemo(8, "no detail");
         return new ResponseData(demoService.selectAllDemos());
-    }
-
-    @RequestMapping(value = "mq")
-    @ResponseBody
-    public void mq() {
-        try {
-            demoService.testMessageQueue();
-        } catch (IOException | TimeoutException e) {
-            LOGGER.error("启动消息队列时发生错误", e);
-        }
     }
 
     @RequestMapping(value = "websocket")

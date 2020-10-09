@@ -2,17 +2,13 @@ package me.duelsol.springmvcseed.service.demo.impl;
 
 import me.duelsol.springmvcseed.dao.DemoMapper;
 import me.duelsol.springmvcseed.model.Demo;
-import me.duelsol.springmvcseed.framework.messagequeue.MessageQueueConsumer;
-import me.duelsol.springmvcseed.framework.messagequeue.MessageQueueProducer;
 import me.duelsol.springmvcseed.model.DemoExample;
 import me.duelsol.springmvcseed.service.BaseService;
 import me.duelsol.springmvcseed.service.demo.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,19 +39,6 @@ public class DemoServiceImpl extends BaseService implements DemoService {
         demo.setDetail(detail);
         demoMapper.insert(demo);
         return demo;
-    }
-
-    @Override
-    public void testMessageQueue() throws IOException, TimeoutException {
-        MessageQueueConsumer consumer = new MessageQueueConsumer("queue");
-        taskExecutor.execute(consumer);
-
-        MessageQueueProducer producer = new MessageQueueProducer("queue");
-        for (int i = 0; i < 10; i++) {
-            String message = "number " + i;
-            producer.sendMessage(message);
-        }
-        producer.close();
     }
 
 }
